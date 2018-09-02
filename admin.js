@@ -9,19 +9,25 @@ $('#sign-up-user').click(function(ev){
         'password':$password,
         'details':$details,
         'eik':$eik
-    })
+    });
+    let $token = localStorage.getItem("token");
     $.ajax({
         type:'POST',
         url:'http://localhost:8080/admin/registeruser',
         headers: {
-            "Authorization" : localStorage.getItem("token")
+            "Authorization" : $token
         },
         dataType: 'json',
         contentType: 'application/json',
         data: $data
     })
     .done(function(data){
-        $('</div>',{text:data}).appendTo($('#result-one'));
-    })
+        console.log(data.userName);
+        $('#result-one').append($('<h1>',{text:data.userName + "successfully added"}));
+    });
 
-})
+});
+
+// $('#sign-up-user').click(function(ev){
+//     $('#result-one').append($('<h1>',{text:'AAAAA'}));
+// });
