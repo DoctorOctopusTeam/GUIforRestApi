@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>User module</title>
+    <link rel="stylesheet" type="text/css" href="user-css.css">
+</head>
+
+<body>
+    <h2>Welcome to user module pannel of NGP Payment System</h2>
+    <h3>User's options:</h3>
+
+    <table>
+        <tr>
+            <th>Operations</th>
+            <th>Actions</th>
+        </tr>
+
+        <tr>
+            <td>
+                <label>Get history of payments for all subscribers </label>
+            </td>
+            <td>
+                <input id="get-history" type="button" value="Get" />
+            </td>
+
+        </tr>
+
+        <tr>
+            <td>
+                <label>Get TOP 10 subscribers by the amount of payments made </label>
+            </td>
+            <td>
+                <input id="get-top-ten" type="button" value="Get" />
+            </td>
+
+        </tr>
+
+        <tr>
+            <td>
+                <label>Get subscriber's info </label>
+                <input id="phone-info" type="number" placeholder="enter phone number" />
+            </td>
+            <td>
+                <input id="btn-info" type="submit" value="Get" />
+            </td>
+
+        </tr>
+
+        <tr>
+            <td>
+                <label>Get all services used by a subscriber </label>
+
+                <input id="phone-services" type="number" placeholder="enter phone number" />
+            </td>
+            <td>
+                <input id="btn-services" type="submit" value="Get" />
+            </td>
+
+        </tr>
+
+        <tr>
+            <td>
+                <label>Get max paid bills by a subscriber for a defined period </label>
+                <input id="phone-max" type="number" placeholder="enter phone number" />
+                <input id="max-start-date" type="text" placeholder="enter start date" />
+                <input id="max-end-date" type="text" placeholder="enter end date" />
+            </td>
+            <td>
+                <input id="btn-max" type="submit" value="Get" />
+            </td>
+
+        </tr>
+
+        <tr>
+            <td>
+                <label>Get average amount paid by a subcriber for a defined period </label>
+                <input id="phone-average" type="number" placeholder="enter phone number" />
+                <input id="average-start-date" type="text" placeholder="enter start date" />
+                <input id="average-end-date" type="text" placeholder="enter end date" />
+            </td>
+            <td>
+                <input id="btn-average" type="submit" value="Get" />
+            </td>
+
+        </tr>
+
+        <tr>
+            <td>
+                <label>Pay particular bill </label>
+                <input id="bill-id" type="number" placeholder="enter bill's ID" />
+            </td>
+            <td>
+                <input id="bnt-pay" type="submit" value="Pay" />
+            </td>
+
+        </tr>
+
+    </table>
+
+    <div class="result">
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <script src="user-script.js"></script>
+</body>
+
+</html>
