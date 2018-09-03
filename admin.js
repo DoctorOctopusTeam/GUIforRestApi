@@ -21,13 +21,16 @@ $('#sign-up-user').click(function(ev){
         contentType: 'application/json',
         data: $data
     })
-    .done(function(data){
+    .done(function(data, result, hxr){
         console.log(data.userName);
-        $('#result-one').append($('<h1>',{text:data.userName + "successfully added"}));
+        // let $color = $('.cube').css('background-color');
+        // $('#result-one').css('background-color', $color).append($('<h2>',
+        // {text:data.userName + ' successfully added to the database',
+        //  class: 'tobedeleted'}));
+
+        $('#modal-title').text(data.userName);
+        $('#modal-text').text('successfully added to the database');
+
     });
 
 });
-
-// $('#sign-up-user').click(function(ev){
-//     $('#result-one').append($('<h1>',{text:'AAAAA'}));
-// });

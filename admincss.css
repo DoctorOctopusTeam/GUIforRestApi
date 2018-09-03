@@ -46,3 +46,6 @@ label{
 .floatleft {
 	float: left;
 }
+.modal-dialog{
+    color: black;
+}
