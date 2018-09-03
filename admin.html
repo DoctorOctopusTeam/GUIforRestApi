@@ -16,39 +16,45 @@
 </head>
 <body>
         <div class="admin-panel"><h1>ADMIN PANEL</h1></div>
+
+        <!-- CREATE CLIENT -->
         <div  class="cube">
-                <label><h3>Create client</h3></label><br><br><br>
+                <label><h3>Create client</h3></label><br><br><hr>
             <ul>
                 <li>
                         <label class="floatleft">Username</label>
-                        <input  type="text" class="inputs" id="username" placeholder="Enter data"><br>
-                </li><br><br>
+                        <input  type="text" class="inputs" id="usernameclient" placeholder="Enter username"><br>
+                </li><br>
                 <li>
                         <label class="floatleft">Password</label>
-                        <input type="password" class="inputs" id="password" placeholder="Enter data"><br>
-                </li><br><br>
+                        <input type="password" class="inputs" id="passwordclient" placeholder="Enter password"><br>
+                </li><br>
                 <li>
-                        <label class="floatleft">Details</label>
-                        <input type="email" class="inputs" id="details" placeholder="Enter data"><br>
-                </li><br><br>
+                    <label class="floatleft">Repeat Password</label>
+                    <input type="password" class="inputs" id="repeat-passwordclient" placeholder="Repeat password"><br>
+                </li><br>
                 <li>
-                        <label class="floatleft">EIK</label>
-                        <input type="email" class="inputs" id="eik" placeholder="Enter data"><br>
-                </li><br><br>
-                <div style="clear: both"></div>
-                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" id="sign-up-user" style="color: black">Sign up new client</button>
+                        <label class="floatleft">Details (otional)</label>
+                        <input type="email" class="inputs" id="detailsclient" placeholder="Enter details"><br>
+                </li><br>
+                <li>
+                        <label class="floatleft">EIK (otional)</label>
+                        <input type="email" class="inputs" id="eikclient" placeholder="Enter eik"><br>
+                </li><br><br><br><br><br>
+                <div style="clear: both"></div><hr>
+                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#clientModal" id="sign-up-user" style="color: black">Sign up new client</button>
                 <!-- ------------------------------------------ -->
-                <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal fade" id="clientModal" role="dialog">
                     <div class="modal-dialog">
                     
                       <!-- Modal content-->
                       <div class="modal-content">
                         <div class="modal-header">
                           <button type="button" class="close" data-dismiss="modal">&times;</button>
-                          <h4 class="modal-title" id="modal-title">Title</h4>
+                          <h4 class="modal-title" id="modal-titleclient"></h4>
                         </div>
-                        <div class="modal-body" id="modal-text">
-                          <p>Some text in the modal.</p>
+                        <div class="modal-body" id="modal-textclient">
+                          <p></p>
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -60,12 +66,112 @@
                 <!-- ---------------------------------------------- -->
 
             </ul>
-            
         </div>
+
+
+
+        <!-- create admin -->
+
         <div  class="cube">
+            <label><h3>Create admin</h3></label><br><br><hr>
+            <ul>
+                <li>
+                        <label class="floatleft">Username</label>
+                        <input  type="text" class="inputs" id="usernameadmin" placeholder="Enter username"><br>
+                </li><br>
+                <li>
+                        <label class="floatleft">Password</label>
+                        <input type="password" class="inputs" id="passwordadmin" placeholder="Enter password"><br>
+                </li><br>
+                <li>
+                    <label class="floatleft">Repeat Password</label>
+                    <input type="password" class="inputs" id="repeat-passwordadmin" placeholder="Repeat password"><br>
+                </li><br>
+                <li>
+                        <label class="floatleft">Email</label>
+                        <input type="email" class="inputs" id="emailadmin" placeholder="Enter email"><br>
+                </li><br><br><br><br><br><br><br>
+                <div style="clear: both"></div><hr>
+                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#adminModal" id="sign-up-admin" style="color: black">Sign up new admin</button>
+                <!-- ------------------------------------------ -->
+                <div class="modal fade" id="adminModal" role="dialog">
+                    <div class="modal-dialog">
+                    
+                      <!-- Modal content-->
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          <h4 class="modal-title" id="modal-titleadmin"></h4>
+                        </div>
+                        <div class="modal-body" id="modal-textadmin">
+                          <p></p>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                      </div>
+                      
+                    </div>
+                  </div>
+                <!-- ---------------------------------------------- -->
+
+            </ul>
         </div>
+
+
+
+
+
+        <!-- UPDATE PANEL -->
         <div  class="cube">
+                <label><h3>Update credentials</h3></label><br><br><hr>
+                <ul>
+                    <li>
+                            <label class="floatleft">Username</label>
+                            <input  type="text" class="inputs" id="usernameupdate" placeholder="Enter username"><br>
+                    </li><br>
+                    <li>
+                            <label class="floatleft">New Username (otional)</label>
+                            <input type="text" class="inputs" id="newusernameupdate" placeholder="Enter new username"><br>
+                    </li><br>
+                    <li>
+                        <label class="floatleft">New Password (otional)</label>
+                        <input type="password" class="inputs" id="passwordupdate" placeholder="Repeat new password"><br>
+                    </li><br>
+                    <li>
+                            <label class="floatleft">New Details (otional)</label>
+                            <input type="email" class="inputs" id="detailsupdate" placeholder="Enter new details"><br>
+                    </li><br>
+                    <li>
+                            <label class="floatleft">New EIK (otional)</label>
+                            <input type="email" class="inputs" id="eikupdate" placeholder="Enter new eik"><br>
+                    </li><br>
+                    <li>
+                            <label class="floatleft">New enabled (otional)</label>
+                            <input type="email" class="inputs" id="enabledupdate" placeholder="Enter new enabled"><br>
+                    </li><br>
+                    <li>
+                            <label class="floatleft">New Email (otional)</label>
+                            <input  type="text" class="inputs" id="emailupdate" placeholder="Enter new email"><br>
+                    </li><br>
+                    <div style="clear: both"></div><hr>
+                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#clientModal" id="update-client" style="color: black">Update Credentials</button>
+                    <!-- ------------------------------------------ -->
+                    <!-- ------------------------------------------ -->
+                </ul>
         </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
         <div class="result" id="result-one">  
         </div>

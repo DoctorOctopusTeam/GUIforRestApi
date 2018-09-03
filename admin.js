@@ -1,19 +1,27 @@
+$(function(){
+    $('#clientModal').modal('show');
+    $('#modal-titleclient').text('REMEMBER');
+    $('#modal-textclient').text('TO CHANGE YOUR PASSWORD OFTEN');
+});
+
 $('#sign-up-user').click(function(ev){
     ev.preventDefault();
-    let $username = $('#username').val();
-    let $password = $('#password').val();
-    let $details = $('#details').val();
-    let $eik = $('#eik').val();
+    let $username = $('#usernameclient').val();
+    let $password = $('#passwordclient').val();
+    let $repeatedPassword = $('#repeat-passwordclient').val();
+    let $details = $('#detailsclient').val();
+    let $eik = $('#eikclient').val();
     let $data = JSON.stringify({
         'userName':$username,
         'password':$password,
         'details':$details,
         'eik':$eik
     });
+    let $url = 'http://localhost:8080/admin/registeruser?repeatedPassword=' + $repeatedPassword;
     let $token = localStorage.getItem("token");
     $.ajax({
         type:'POST',
-        url:'http://localhost:8080/admin/registeruser',
+        url:$url,
         headers: {
             "Authorization" : $token
         },
@@ -22,15 +30,124 @@ $('#sign-up-user').click(function(ev){
         data: $data
     })
     .done(function(data, result, hxr){
-        console.log(data.userName);
-        // let $color = $('.cube').css('background-color');
-        // $('#result-one').css('background-color', $color).append($('<h2>',
-        // {text:data.userName + ' successfully added to the database',
-        //  class: 'tobedeleted'}));
+        $('#usernameclient').val('');
+        $('#passwordclient').val('');
+        $('#repeat-passwordclient').val('');
+        $('#detailsclient').val('');
+        $('#eikclient').val('');
+        $('#modal-titleclient').empty();
+        $('#modal-textclient').empty();
+        $('#modal-titleclient').text('Successfully added new client');
+        $('#modal-textclient').text(data.userName + ' added to the database');
+    })
+    .fail(function(data, result, hxr){
+        $('#modal-titleclient').empty();
+        $('#modal-textclient').empty();
+        let $errorMessage = data.getResponseHeader('Error');
+        $('#modal-titleclient').text(result);
+        $('#modal-textclient').text($errorMessage);
+    });
 
-        $('#modal-title').text(data.userName);
-        $('#modal-text').text('successfully added to the database');
+});
+//-----------------------------------------------------------------------------------------
+$('#sign-up-admin').click(function(ev){
+    ev.preventDefault();
+    let $username = $('#usernameadmin').val();
+    let $password = $('#passwordadmin').val();
+    let $repeatedPassword = $('#repeat-passwordadmin').val();
+    let $email = $('#emailadmin').val();
+    let $data = JSON.stringify({
+        'userName':$username,
+        'password':$password,
+        'email': $email
+    });
+    let $url = 'http://localhost:8080/admin/registeradmin?repeatedPassword=' + $repeatedPassword;
+    let $token = localStorage.getItem("token");
+    $.ajax({
+        type:'POST',
+        url:$url,
+        headers: {
+            "Authorization" : $token
+        },
+        dataType: 'json',
+        contentType: 'application/json',
+        data: $data
+    })
+    .done(function(data, result, hxr){
+        $('#usernameadmin').val('');
+        $('#passwordadmin').val('');
+        $('#repeat-passwordadmin').val('');
+        $('#emailadmin').val('');
+        $('#modal-titleadmin').empty();
+        $('#modal-textadmin').empty();
+        $('#modal-titleadmin').text('Successfully added new admin');
+        $('#modal-textadmin').text(data.userName + ' added to the database');
+    })
+    .fail(function(data, result, hxr){
+        $('#modal-titleadmin').empty();
+        $('#modal-textadmin').empty();
+        let $errorMessage = data.getResponseHeader('Error');
+        $('#modal-titleadmin').text(result);
+        $('#modal-textadmin').text($errorMessage);
+    });
 
+});
+//------------------------------------------------------------------------------------------
+
+$('#update-client').click(function(ev){
+    ev.preventDefault();
+    let $currentUsername = $('#usernameupdate').val();
+    let $newUsername = $('#newusernameupdate').val();
+    let $newPassword = $('#passwordupdate').val();
+    let $newDetails = $('#detailsupdate').val();
+    let $newEik = $('#eikupdate').val();
+    let $newEmail = $('#emailupdate').val();
+    let $newEnabled = $('#enabledupdate').val();
+    if($newEnabled === ""){
+        $newEnabled = 5;
+    }
+    // if($newEik === ""){
+    //     $newEik = 0;
+    // }
+    let $data = JSON.stringify({
+        'userName':$newUsername,
+        'password':$newPassword,
+        'details':$newDetails,
+        'eik':$newEik,
+        'email':$newEmail,
+        'enabled':$newEnabled
+    });
+    let $url = 'http://localhost:8080/admin/updatecreds?currentuserName=' + $currentUsername;
+    let $token = localStorage.getItem("token");
+    $.ajax({
+        type:'POST',
+        url:$url,
+        headers: {
+            "Authorization" : $token
+        },
+        dataType: 'json',
+        contentType: 'application/json',
+        data: $data
+    })
+    .done(function(data, result, hxr){
+        $('#usernameupdate').val('');
+        $('#newusernameupdate').val('');
+        $('#passwordupdate').val('');
+        $('#detailsupdate').val('');
+        $('#eikupdate').val('');
+        $('#emailupdate').val('');
+        $('#enabledupdate').val('');
+        $('#modal-titleclient').empty();
+        $('#modal-textclient').empty();
+        $('#modal-titleclient').text('Successful update');
+        $('#modal-textclient').text(data.userName + ' added to the database');
+    })
+    .fail(function(data, result, hxr){
+        $('#modal-titleclient').empty();
+        $('#modal-textclient').empty();
+        let $errorMessage = data.getResponseHeader('Error');
+        $('#modal-titleclient').text(result);
+        $('#modal-textclient').text($errorMessage);
     });
 
 });

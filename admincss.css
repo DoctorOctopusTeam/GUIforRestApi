@@ -14,7 +14,7 @@ h1{
     display:inline-block;
     width: 30%;
     background-color:#337ab7;
-    height: 400px;
+    height: 500px;
     margin-top: 20px;
     margin-left: 32px;
     border-radius: 10px; 
@@ -48,4 +48,7 @@ label{
 }
 .modal-dialog{
     color: black;
+}
+hr{
+    margin-left: -40px;
 }
