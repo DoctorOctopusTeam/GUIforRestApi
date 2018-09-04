@@ -152,7 +152,7 @@ $('#update-client').click(function(ev){
         $('#modal-titleclient').empty();
         $('#modal-textclient').empty();
         $('#modal-titleclient').text('Successful update');
-        $('#modal-textclient').text('If you have changed the password new login is required');
+        $('#modal-textclient').text('If you have changed the username new login is required');
     })
     .fail(function(data, result, hxr){
         $('#modal-titleclient').empty();
