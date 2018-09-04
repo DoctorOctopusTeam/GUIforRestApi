@@ -18,3 +18,7 @@ tr:nth-child(even) {
     font-family: Arial, Helvetica, sans-serif;
     border: 2px solid black;
 }
+
+h2{
+    text-align: center;
+}
