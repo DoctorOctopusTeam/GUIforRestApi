@@ -62,10 +62,12 @@
 
         <tr>
             <td>
-                <label>Get max paid bills by a subscriber for a defined period </label>
+                <label>Get the biggest bill paid by a subscriber for a defined period </label>
                 <input id="phone-max" type="number" placeholder="enter phone number" />
-                <input id="max-start-date" type="text" placeholder="enter start date" />
-                <input id="max-end-date" type="text" placeholder="enter end date" />
+                <label>From:</label>
+                <input id="max-start-date" type="text" placeholder="yyyy-mm-dd" />
+                <label>To:</label>
+                <input id="max-end-date" type="text" placeholder="yyy-mm-dd" />
             </td>
             <td>
                 <input id="btn-max" type="submit" value="Get" />
@@ -77,11 +79,24 @@
             <td>
                 <label>Get average amount paid by a subcriber for a defined period </label>
                 <input id="phone-average" type="number" placeholder="enter phone number" />
-                <label>From:</label><input id="average-start-date" type="text" placeholder="yyyy-mm-dd" />
-                <label>To:</label><input id="average-end-date" type="text" placeholder="yyy-mm-dd" />
+                <label>From:</label>
+                <input id="average-start-date" type="text" placeholder="yyyy-mm-dd" />
+                <label>To:</label>
+                <input id="average-end-date" type="text" placeholder="yyy-mm-dd" />
             </td>
             <td>
                 <input id="btn-average" type="submit" value="Get" />
+            </td>
+
+        </tr>
+
+        <tr>
+            <td>
+                <label>Get list ot unpaid bills of a subscriber </label>
+                <input id="unpaid-phone" type="number" placeholder="enter phone number" />
+            </td>
+            <td>
+                <input id="btn-unpaid" type="submit" value="Get" />
             </td>
 
         </tr>

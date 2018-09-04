@@ -18,15 +18,18 @@ $('#login-button').click(function (ev) {
             auth = body["Authorization"];
             localStorage.setItem("token", auth);
             role = body["Role"];
-            console.log(role);
-            console.log(auth);
             if (role === "[ROLE_USER]") {
                 window.location.href = "/user module/user.html";
                 
             } else {
                 window.location.href = "/admin.html";
             }
-
-    });
+        
+    })
+    .fail(function(){
+        $('#invalid').show();
+    })
+    $('#username').val('');
+    $('#password').val('');
 });
 
