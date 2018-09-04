@@ -1,8 +1,18 @@
-$(function(){
-    $('#clientModal').modal('show');
-    $('#modal-titleclient').text('REMEMBER');
-    $('#modal-textclient').text('TO CHANGE YOUR PASSWORD OFTEN');
-});
+// $(function(){
+//     $("#popModal").modal({
+//         backdrop: 'static',
+//         keyboard: true
+//     });
+//     $('#popModal').modal('show');
+//     // $('#tit').text('REMEMBER');
+//     // $('#tex').text('TO CHANGE YOUR PASSWORD OFTEN');
+//     $('#change-password-btn').click(function(ev){
+//         ev.preventDefault();
+
+//     });
+// });
+
+
 
 $('#sign-up-user').click(function(ev){
     ev.preventDefault();
@@ -106,9 +116,11 @@ $('#update-client').click(function(ev){
     if($newEnabled === ""){
         $newEnabled = 5;
     }
-    // if($newEik === ""){
-    //     $newEik = 0;
-    // }
+    if(typeof($newEik) === 'string' && $newEik !== ''){
+        $('#modal-titleclient').text('Can not');
+        $('#modal-textclient').text('accept a string value for EIK');
+        return;
+     }
     let $data = JSON.stringify({
         'userName':$newUsername,
         'password':$newPassword,
@@ -140,7 +152,7 @@ $('#update-client').click(function(ev){
         $('#modal-titleclient').empty();
         $('#modal-textclient').empty();
         $('#modal-titleclient').text('Successful update');
-        $('#modal-textclient').text(data.userName + ' added to the database');
+        $('#modal-textclient').text('If you have changed the password new login is required');
     })
     .fail(function(data, result, hxr){
         $('#modal-titleclient').empty();

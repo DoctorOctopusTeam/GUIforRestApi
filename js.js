@@ -17,8 +17,11 @@ $('#login-button').click(function (ev) {
         var role = xhr.getResponseHeader('Role');
         localStorage.setItem("token", token);
         if(role === "ROLE_USER") {
-            window.location.href = "http://localhost:8081/one.html";
-        } else {
+            window.location.href = "http://localhost:8081/admin.html";
+        } 
+        if(role === "ROLE_UNAUTHORIZEDADMIN") {
+            window.location.href = "http://localhost:8081/unauthorizedadmin.html";
+        }else {
             window.location.href = "http://localhost:8081/two.html";
         }
     });

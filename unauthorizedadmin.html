@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="unathorizedadmin.css">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> -->
+    <script src="unauthorizedadmin.js" async></script>
+</head>
+    <body>
+        <div class="modal fade" id="popModal" role="dialog">
+                <div class="modal-dialog">
+                
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title" id="tit"></h4><br>
+                      <label style="margin-left: 35px">Password</label>
+                      <input type="password" style="margin-left: 100px" id="initialpass" placeholder="Enter new password"><br>
+                      <br>     
+                    </div>
+                    <div class="modal-body" id="tex"><br>
+                            <label style="margin-left: 35px">Repeat password</label>
+                            <input type="password" style="margin-left: 100px" id="repeatinitialpass" placeholder="Repeat new password"><br>
+                      <p></p>
+                    </div>
+                    <div class="modal-footer">
+                      <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+                      <button type="button" id="change-password-btn" >Send</button>
+                    </div>
+                  </div>
+                  
+                </div>
+        </div>
+
+
+
+    </body>
+</html>
