@@ -59,3 +59,13 @@ hr{
 h3{
     margin-top: 5px;
 }
+.gj-datepicker{
+    margin-left: 135px;
+}
+.form-control{
+    height: 23px;
+}
+.input-group-addon{
+    padding-top:2px;
+    padding-bottom: 3px;
+}

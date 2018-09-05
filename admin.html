@@ -5,11 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="admincss.css">
+    
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/js/gijgo.min.js" type="text/javascript"></script>
+  <link href="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="admincss.css">
 
     <!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> -->
     <script src="admin.js" async></script>
@@ -51,7 +57,7 @@
                 <button type="button" class="btn btn-default" id="createadmin">CREATE ADMIN</button>
                 <button type="button" class="btn btn-default" id="updatecredentials">UPDATE CREDENTIALS</button>
                 <button type="button" class="btn btn-default" id="deleteuser">DELETE USER</button>
-                <button type="button" class="btn btn-default" id="createclient">ISSUE BILL</button>
+                <button type="button" class="btn btn-default" id="issuebill">ISSUE BILL</button>
         </div>
         
         <div  class="cube" id="cube1">
@@ -209,9 +215,94 @@
                                     <input  type="text" class="inputs" id="usernamedeleterepeat" placeholder="Enter username"><br>
                             </li><br>
                             <div style="clear: both"></div><hr>
-                            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#clientModal" id="delete-user" style="color: red">Delete user</button>
+                            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#delModal" id="delete-user" style="color: red">Delete user</button>
+
+                            <div class="modal fade" id="delModal" role="dialog">
+                                        <div class="modal-dialog modal-lg">
+                                        
+                                          <!-- Modal content-->
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                                              <h4 class="modal-title" id="modal-titledel"></h4>
+                                            </div>
+                                            <div class="modal-body" id="modal-textdel">
+                                              <p></p>
+                                            </div>
+                                            <div class="modal-footer">
+                                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            </div>
+                                          </div>
+                                          
+                                        </div>
+                                      </div>
+
                         </ul>
         </div>
+        <!-- issue new bill -->
+
+        <div  class="cube" id="cube5">
+                        <label><h3 style="margin-top: 5px">Issue bill</h3></label><hr style="margin-top: -10px">
+                        <ul>
+                            <li>
+                                    <label class="floatleft">Service</label>
+                                    <input  type="text" class="inputs" id="service" placeholder="Enter service"><br><br>
+                                    <label class="floatleft">Start date</label>
+                                    <input  type="text" class="inputs" id="datepicker1" width="220" placeholder="20/20/2020"><br>
+                                    <label class="floatleft">End date</label>
+                                    <input  type="text" class="inputs" id="datepicker2" width="220" placeholder="2020/20/20"><br>
+                                    <label class="floatleft">Phone number</label>
+                                    <input  type="text" class="inputs" id="phone" placeholder="Enter phonenumber"><br><br>
+                                    <label class="floatleft">Amount</label>
+                                    <input  type="text" class="inputs" id="amount" placeholder="Enter currency"><br><br>
+                                    <label class="floatleft">Currency</label>
+                                    <input  type="text" class="inputs" id="cur" placeholder="Enter currency"><br><br>
+                                    <!-- ---------------------------------------------------------------- -->
+
+                                                <script>
+                                                $('#datepicker1').datepicker({
+                                                uiLibrary: 'bootstrap',
+                                                format: "yyyy-mm-dd",
+                                                changeMonth: true,
+                                                changeYear: true
+                                                });
+                                                $('#datepicker2').datepicker({
+                                                uiLibrary: 'bootstrap',
+                                                format: "yyyy-mm-dd",
+                                                changeMonth: true,
+                                                changeYear: true
+                                                });
+                                                </script>
+                                    <!-- ---------------------------------------------------------------- -->
+                            </li><br>
+                            <div style="clear: both"></div><hr>
+                            <button type="button" id="issue" class="btn btn-info btn-lg" data-toggle="modal" data-target="#billModal"  style="color: black">Issue bill</button>
+
+                            <div class="modal fade" id="billModal" role="dialog">
+                                        <div class="modal-dialog modal-lg">                                       
+                                          <!-- Modal content-->
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <h4 class="modal-title" id="modal-titlebill"></h4>
+                                            </div>
+                                            <div class="modal-body" id="modal-textbill">
+                                              <p></p>
+                                            </div>
+                                            <div class="modal-footer">
+                                              <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+                                            </div>
+                                          </div>
+                                          
+                                        </div>
+                                      </div>
+
+                        </ul>
+        </div>
+
+
+
+
+
 
 
 

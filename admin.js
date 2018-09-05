@@ -34,6 +34,15 @@ $('#deleteuser').click(function(){
         x.css('display', 'none');
     }
 });
+//toggles issue nw bill panel
+$('#issuebill').click(function(){
+    let x = $('#cube5');
+    if (x.css('display') == 'none') {
+        x.css('display', 'inline-block');
+    } else {
+        x.css('display', 'none');
+    }
+});
 // signs up client
 $('#sign-up-user').click(function(ev){
     ev.preventDefault();
@@ -189,8 +198,10 @@ $('#delete-user').click(function(ev){
     let $username = $('#usernamedelete').val();
     let $repeatUsername = $('#usernamedeleterepeat').val();
     if($username !== $repeatUsername){
-        $('#modal-titleclient').text('Be sure to match');
-        $('#modal-textclient').text('both firedls!');
+        $('#modal-titledel').empty();
+        $('#modal-textdel').empty();
+        $('#modal-titledel').text('Be sure to match');
+        $('#modal-textdel').text('both firedls!');
         return;
     }
     let $url = 'http://localhost:8080/admin/delete?nameOfBank=' + $username;
@@ -205,21 +216,59 @@ $('#delete-user').click(function(ev){
         contentType: 'application/json' 
     })
     .done(function(data, result, hxr){
-        $('#modal-titleclient').empty();
-        $('#modal-textclient').empty();
-        $('#modal-titleclient').text('Successful delete');
-        $('#modal-textclient').text('of ' + data.userName + ' entry');
+        $('#modal-titledel').empty();
+        $('#modal-textdel').empty();
+        $('#modal-titledel').text('Successful delete');
+        $('#modal-textdel').text('of ' + data.userName + ' entry');
     })
     .fail(function(data, result, hxr){
-        $('#modal-titleclient').empty();
-        $('#modal-textclient').empty();
+        $('#modal-titledel').empty();
+        $('#modal-textdel').empty();
         let $errorMessage = data.getResponseHeader('Error');
-        $('#modal-titleclient').text(result);
-        $('#modal-textclient').text($errorMessage);
+        $('#modal-titledel').text(result);
+        $('#modal-textdel').text($errorMessage);
     });
-
-
-
-
+});
+//issue new bill
+$('#issue').click(function(ev){
+    ev.preventDefault();
+    let $service = $('#service').val();
+    let $startDate = $('#datepicker1').val();
+    let $endDate = $('#datepicker2').val();
+    let $phoneNumber = $('#phone').val();
+    let $amount = $('#amount').val();
+    let $currency = $('#cur').val();
+    let $url = 'http://localhost:8080/admin/issuebill?subscriber=' + $phoneNumber;
+    let $token = localStorage.getItem("token");
+    let $data = JSON.stringify({
+        'service':$service,
+        'startDate':$startDate,
+        'endDate':$endDate,
+        'amount':$amount,
+        'currency':$currency
+    });
+    $.ajax({
+        type:'POST',
+        url:$url,
+        headers: {
+            "Authorization" : $token
+        },
+        dataType: 'json',
+        contentType: 'application/json',
+        data: $data
+    })
+    .done(function(data, result, hxr){
+        $('#modal-titlebill').empty();
+        $('#modal-textbill').empty();
+        $('#modal-titlebill').text('Success');
+        $('#modal-textbill').text('bill with ID ' + data.id + ' created!');
+    })
+    .fail(function(data, result, hxr){
+        $('#modal-titlebill').empty();
+        $('#modal-textbill').empty();
+        let $errorMessage = data.getResponseHeader('Error');
+        $('#modal-titlebill').text(result);
+        $('#modal-textbill').text($errorMessage);
+    });
 
 });
