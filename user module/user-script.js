@@ -80,7 +80,7 @@ $('#btn-max').click(function (ev) {
                 .append($('<div>The biggest amout paid for service by subscriber with phone number:' + subscriber + '</div>'))
                 .append($('<div>For period: from ' + start + ' to ' + end + '</div>'))
                 .append($('<div>Service: ' + data['service'] + '</div>'))
-                .append($('<div>Amount: ' + data['amount'] + ' BGN</div>'));
+                .append($('<div>Amount: ' + data['amount'] + ' ' + data['currency'] + '</div>'));
         } else {
             $('.result')
                 .append($('<div>Invalid action. Enter valid phone number!</div>'));
@@ -88,14 +88,14 @@ $('#btn-max').click(function (ev) {
     })
         .fail(function () {
             $('.result')
-                .append($('<div>Invalid action. Enter parameters!</div>'));
+                .append($('<div>Invalid action. Enter valid parameters!</div>'));
         });
     $("#phone-max").val('');
     $("#max-start-date").val('');
     $("#max-end-date").val('');
 });
 
-//get average of payments DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE
+//get average of payments DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE
 $('#btn-average').click(function (ev) {
     ev.preventDefault();
     $(".result").html("");
@@ -110,11 +110,15 @@ $('#btn-average').click(function (ev) {
             "Authorization": localStorage.getItem("token")
         }
     }).done(function (data) {
+        if (!jQuery.isEmptyObject(data)) {
         $('.result')
             .append($('<div>The average amout paid for services by subscriber with phone number:' + subscriber + '</div>'))
             .append($('<div>For period: from ' + start + ' to ' + end + '</div>'))
             .append($('<div>Amount: ' + data['Average sum'] + ' BGN</div>'));
-
+        }else {
+            $('.result')
+                .append($('<div>No records for this period!</div>'));
+        }
     })
         .fail(function () {
             $('.result')
@@ -153,7 +157,7 @@ $('#btn-history').click(function (ev) {
                     var $nr = $('<div>Bill ID: ' + response[i]['id'] + ', Service: ' + response[i]['service'] + 
                     ', PayDate: ' + response[i]['payDate'] + ', Amount: ' + response[i]['amount'] + ' ' + response[i]['currency'] + 
                     ' Subscriber:' + response[i]['subscriber']['firstName'] + ' ' + response[i]['subscriber']['lastName']+ 
-                    ', Phone number: ' + response[i]['subscriber']['phoneNumber'] +'</div>');
+                    ',. Phone number: ' + response[i]['subscriber']['phoneNumber'] +'</div>');
                     $('.result').append($nr);
                 }
             }
