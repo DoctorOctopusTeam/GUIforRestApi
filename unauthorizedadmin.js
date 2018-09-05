@@ -23,12 +23,15 @@ $('#change-password-btn').click(function(ev){
         contentType: 'application/json'
     })
     .done(function(data, result, hxr){
-
-        
-        setTimeout(function () {
-            $('#tit').text('Success! You will be redirected in 3 seconds');
-        }, 3000);
-        window.location.href = "http://localhost:8081/admin.html";
+        let $seconds = 5;
+        setInterval(function () {   
+            $('#tit').text('Success! You will be redirected in ' + $seconds);
+            $seconds--;
+            if($seconds < 1){
+                clearInterval();
+                window.location.href = "http://localhost:8081/admin.html";
+            }
+        }, 1000);       
     })
     .fail(function(data, result, hxr){
         let $errorMessage = data.getResponseHeader('Error');

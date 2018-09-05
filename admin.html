@@ -16,62 +16,46 @@
 </head>
 <body>
 
-                <div class="modal fade" id="popModal" role="dialog">
+                <div class="modal fade" id="querymodal" role="dialog">
                                 <div class="modal-dialog">
                                 
                                   <!-- Modal content-->
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h4 class="modal-title" id="tit"></h4>
-                                      <label style="margin-left: 35px">Password</label>
-                                      <input type="password" style="margin-left: 100px" id="initialpass" placeholder="Enter new password"><br>
-                                      <label style="margin-left: 35px">Password</label>
-                                      <input type="password" style="margin-left: 100px" id="initialpasss" placeholder="Enter new password"><br>
-                                    </div>
-                                    <div class="modal-body" id="tex">
-                                      <p></p>
-                                    </div>
-                                    <div class="modal-footer">
+                                        <div class="modal-content">
+                                                <div class="modal-header">
+                                                <h4 class="modal-title" id="tit"></h4>
+                                                <label style="margin-left: 35px">Password</label>
+                                                <input type="password" style="margin-left: 100px" id="initialpass" placeholder="Enter new password"><br>
+                                                <label style="margin-left: 35px">Password</label>
+                                                <input type="password" style="margin-left: 100px" id="initialpasss" placeholder="Enter new password"><br>
+                                         </div>
+                                         <div class="modal-body" id="tex">
+                                                <p></p>
+                                        </div>
+                                        <div class="modal-footer">
                                       <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
-                                      <button type="button" id="change-password-btn" >Send</button>
+                                                <button type="button" id="change-password-btn" >Send</button>
                                     </div>
-                                  </div>
+                                        </div>
                                   
                                 </div>
-                              </div>
+                </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <div class="admin-panel"><h1>ADMIN PANEL</h1></div>
+        <div class="admin-panel">
+                <h1>ADMIN PANEL</h1>
+        </div>
 
         <!-- CREATE CLIENT -->
-        <div  class="cube">
-                <label><h3>Create client</h3></label><br><br><hr>
+        <div class="nav">
+                <button type="button" class="btn btn-default" id="createclient">CREATE CLIENT</button>
+                <button type="button" class="btn btn-default" id="createadmin">CREATE ADMIN</button>
+                <button type="button" class="btn btn-default" id="updatecredentials">UPDATE CREDENTIALS</button>
+                <button type="button" class="btn btn-default" id="deleteuser">DELETE USER</button>
+                <button type="button" class="btn btn-default" id="createclient">ISSUE BILL</button>
+        </div>
+        
+        <div  class="cube" id="cube1">
+                <label><h3 style="margin-top: 5px">Create client</h3></label><hr style="margin-top: -10px">
             <ul>
                 <li>
                         <label class="floatleft">Username</label>
@@ -124,8 +108,8 @@
 
         <!-- create admin -->
 
-        <div  class="cube">
-            <label><h3>Create admin</h3></label><br><br><hr>
+        <div  class="cube" id="cube2">
+            <label><h3 style="margin-top: 5px">Create admin</h3></label><hr style="margin-top: -10px">
             <ul>
                 <li>
                         <label class="floatleft">Username</label>
@@ -175,8 +159,8 @@
 
 
         <!-- UPDATE PANEL -->
-        <div  class="cube">
-                <label><h3>Update credentials</h3></label><br><br><hr>
+        <div  class="cube" id="cube3">
+                <label><h3 style="margin-top: 5px">Update credentials</h3></label><hr style="margin-top: -10px">
                 <ul>
                     <li>
                             <label class="floatleft">Username</label>
@@ -213,23 +197,34 @@
                 </ul>
         </div>
 
+        <!-- delete panel -->
 
-
-
-
-
-
-
-
-
-
-
-
-        <div class="result" id="result-one">  
+        <div  class="cube" id="cube4" style="height: 210px">
+                        <label><h3 style="margin-top: 5px;color: red">Delete user</h3></label><hr style="margin-top: -10px">
+                        <ul>
+                            <li>
+                                    <label class="floatleft">Username</label>
+                                    <input  type="text" class="inputs" id="usernamedelete" placeholder="Enter username"><br><br>
+                                    <label class="floatleft">Repeat username</label>
+                                    <input  type="text" class="inputs" id="usernamedeleterepeat" placeholder="Enter username"><br>
+                            </li><br>
+                            <div style="clear: both"></div><hr>
+                            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#clientModal" id="delete-user" style="color: red">Delete user</button>
+                        </ul>
         </div>
 
-        <div  class="cube">
+
+
+
+
+
+
+
+
+
+        <!-- <div class="result" id="result-one">  
         </div>
+
         <div  class="cube">
         </div>
         <div  class="cube">
@@ -246,7 +241,7 @@
         </div>
 
         <div class="result">
-        </div>
+        </div> -->
 
     
 

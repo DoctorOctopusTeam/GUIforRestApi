@@ -1,4 +1,40 @@
-
+// toggles the create client panel
+$('#createclient').click(function(){
+    let x = $('#cube1');
+    if (x.css('display') == 'none') {
+        x.css('display', 'inline-block');
+    } else {
+        x.css('display', 'none');
+    }
+});
+// toggles the create admin panel
+$('#createadmin').click(function(){
+    let x = $('#cube2');
+    if (x.css('display') == 'none') {
+        x.css('display', 'inline-block');
+    } else {
+        x.css('display', 'none');
+    }
+});
+// toggles the update credentials panel
+$('#updatecredentials').click(function(){
+    let x = $('#cube3');
+    if (x.css('display') == 'none') {
+        x.css('display', 'inline-block');
+    } else {
+        x.css('display', 'none');
+    }
+});
+//toggles the delete panel
+$('#deleteuser').click(function(){
+    let x = $('#cube4');
+    if (x.css('display') == 'none') {
+        x.css('display', 'inline-block');
+    } else {
+        x.css('display', 'none');
+    }
+});
+// signs up client
 $('#sign-up-user').click(function(ev){
     ev.preventDefault();
     let $username = $('#usernameclient').val();
@@ -44,7 +80,7 @@ $('#sign-up-user').click(function(ev){
     });
 
 });
-//-----------------------------------------------------------------------------------------
+//signs up admin
 $('#sign-up-admin').click(function(ev){
     ev.preventDefault();
     let $username = $('#usernameadmin').val();
@@ -87,8 +123,7 @@ $('#sign-up-admin').click(function(ev){
     });
 
 });
-//------------------------------------------------------------------------------------------
-
+//updates credentials
 $('#update-client').click(function(ev){
     ev.preventDefault();
     let $currentUsername = $('#usernameupdate').val();
@@ -146,5 +181,45 @@ $('#update-client').click(function(ev){
         $('#modal-titleclient').text(result);
         $('#modal-textclient').text($errorMessage);
     });
+
+});
+//delete user
+$('#delete-user').click(function(ev){
+    ev.preventDefault();
+    let $username = $('#usernamedelete').val();
+    let $repeatUsername = $('#usernamedeleterepeat').val();
+    if($username !== $repeatUsername){
+        $('#modal-titleclient').text('Be sure to match');
+        $('#modal-textclient').text('both firedls!');
+        return;
+    }
+    let $url = 'http://localhost:8080/admin/delete?nameOfBank=' + $username;
+    let $token = localStorage.getItem("token");
+    $.ajax({
+        type:'POST',
+        url:$url,
+        headers: {
+            "Authorization" : $token
+        },
+        dataType: 'json',
+        contentType: 'application/json' 
+    })
+    .done(function(data, result, hxr){
+        $('#modal-titleclient').empty();
+        $('#modal-textclient').empty();
+        $('#modal-titleclient').text('Successful delete');
+        $('#modal-textclient').text('of ' + data.userName + ' entry');
+    })
+    .fail(function(data, result, hxr){
+        $('#modal-titleclient').empty();
+        $('#modal-textclient').empty();
+        let $errorMessage = data.getResponseHeader('Error');
+        $('#modal-titleclient').text(result);
+        $('#modal-textclient').text($errorMessage);
+    });
+
+
+
+
 
 });
