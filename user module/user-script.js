@@ -125,8 +125,7 @@ $('#btn-average').click(function (ev) {
     $("#average-end-date").val('');
 });
 
-//get history of payments DONE DONE DONE DONE DONE DONE DONE DONE
-//BUT - displays ALL the payments - should display only 20 for example, and ask to show you the next page ot payments
+//get history of payments DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE
 $('#btn-history').click(function (ev) {
     ev.preventDefault();
     $(".result").html("");
@@ -139,24 +138,54 @@ $('#btn-history').click(function (ev) {
             "Authorization": localStorage.getItem("token")
         }
     }).done(function (response) {
-        if (!jQuery.isEmptyObject(data)) {
-            var toAppend = '';
-            $.each(response, function (i, o) {
-                toAppend += '<div> Bill ID:' + o.id + ', Service:' + o.service + ', PayDate:' + o.payDate + ', Amount: ' + o.amount +
-                    ' ' + o.currency + ', Name: ' + o.subscriber.firstName + ' ' + o.subscriber.lastName + ', Phone number: ' +
-                    o.subscriber.phoneNumber + '</div>';
+        if (!jQuery.isEmptyObject(response)) {
+            $('#nextValue').show();
+            $('#PreeValue').show();
+            var max_size = response.length;
+            var sta = 0;
+            var elements_per_page = 10;
+            var limit = elements_per_page;
+            goFun(sta, limit);
+
+            function goFun(sta, limit) {
+                for (var i = sta; i < limit; i++) {
+
+                    var $nr = $('<div>Bill ID: ' + response[i]['id'] + ', Service: ' + response[i]['service'] + 
+                    ', PayDate: ' + response[i]['payDate'] + ', Amount: ' + response[i]['amount'] + ' ' + response[i]['currency'] + 
+                    ' Subscriber:' + response[i]['subscriber']['firstName'] + ' ' + response[i]['subscriber']['lastName']+ 
+                    ', Phone number: ' + response[i]['subscriber']['phoneNumber'] +'</div>');
+                    $('.result').append($nr);
+                }
+            }
+
+            $('#nextValue').click(function () {
+
+                var next = limit;
+                if (max_size >= next) {
+                    limit = limit + elements_per_page;
+                    $('.result').empty();
+                    goFun(next, limit);
+                }
+            });
+            $('#PreeValue').click(function () {
+                var pre = limit - (2 * elements_per_page);
+                if (pre >= 0) {
+                    limit = limit - elements_per_page;
+                    $('.result').empty();
+                    goFun(pre, limit);
+                }
             });
         } else {
             $('.result')
                 .append($('<div>No payment records available!</div>'));
         }
-        $('.result').append(toAppend);
     })
 
         .fail(function () {
             $('.result')
                 .append($('<div>Error accured!</div>'));
         });
+    
 });
 
 //get top 10 subscribers by biggest amount /for all bills/ paid DONE DONE DONE DONE DONE DONE DONE DONE
@@ -254,7 +283,7 @@ $('#btn-unpaid').click(function (ev) {
     })
         .fail(function () {
             $('.result')
-            .append($('<div>Error accured! Enter valid parameters!</div>')); 
+                .append($('<div>Error accured! Enter valid parameters!</div>'));
         });
     $("#unpaid-phone").val('');
 });
