@@ -4,11 +4,6 @@ $(function(){
         keyboard: true
     });
     $('#popModal').modal('show');
-    // $('#tit').text('REMEMBER');
-    // $('#tex').text('TO CHANGE YOUR PASSWORD OFTEN');
-    // $('#change-password-btn').click(function(ev){
-    //     ev.preventDefault();
-    // });
 });
 
 
@@ -29,7 +24,10 @@ $('#change-password-btn').click(function(ev){
     })
     .done(function(data, result, hxr){
 
-        $('#tit').text('Success!');
+        
+        setTimeout(function () {
+            $('#tit').text('Success! You will be redirected in 3 seconds');
+        }, 3000);
         window.location.href = "http://localhost:8081/admin.html";
     })
     .fail(function(data, result, hxr){

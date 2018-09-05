@@ -1,18 +1,3 @@
-// $(function(){
-//     $("#popModal").modal({
-//         backdrop: 'static',
-//         keyboard: true
-//     });
-//     $('#popModal').modal('show');
-//     // $('#tit').text('REMEMBER');
-//     // $('#tex').text('TO CHANGE YOUR PASSWORD OFTEN');
-//     $('#change-password-btn').click(function(ev){
-//         ev.preventDefault();
-
-//     });
-// });
-
-
 
 $('#sign-up-user').click(function(ev){
     ev.preventDefault();

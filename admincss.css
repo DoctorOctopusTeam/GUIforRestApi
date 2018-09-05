@@ -1,7 +1,7 @@
 .admin-panel{
     border-radius: 10px;
     height: 100px;
-    background-color: blueviolet;
+    background-color: #337ab7;;
     margin-left: 32px;
     margin-right: 32px;
     text-align: center;
@@ -23,8 +23,6 @@ h1{
     color: aliceblue;
 }
 .result{
-    /* height: 100px;
-    background-color: blueviolet; */
     margin-left: 32px;
     margin-right: 32px;
 }
