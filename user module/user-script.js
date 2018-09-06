@@ -86,10 +86,20 @@ $('#btn-max').click(function (ev) {
                 .append($('<div>No records for this period!</div>'));
         }
     })
-        .fail(function () {
+    .fail(function (data) {
+        if (data.getResponseHeader('Error') === 'Not valid phone number') {
+            var det = data.getResponseHeader('Error');
             $('.result')
-                .append($('<div>Invalid action. Enter valid parameters!</div>'));
-        });
+                .append('<div>' + det + '</div>');
+        } else if (data.getResponseHeader('Error') === 'No payment records for this period') {
+            var det = data.getResponseHeader('Error');
+            $('.result')
+                .append('<div>' + det + '</div>');
+        } else {
+            $('.result')
+                .append($('<div>Invalid action. Enter valid time period parameters!</div>'));
+        }
+    });
     $("#phone-max").val('');
     $("#max-start-date").val('');
     $("#max-end-date").val('');
@@ -111,18 +121,28 @@ $('#btn-average').click(function (ev) {
         }
     }).done(function (data) {
         if (!jQuery.isEmptyObject(data)) {
-        $('.result')
-            .append($('<div>The average amout paid for services by subscriber with phone number:' + subscriber + '</div>'))
-            .append($('<div>For period: from ' + start + ' to ' + end + '</div>'))
-            .append($('<div>Amount: ' + data['Average sum'] + ' BGN</div>'));
-        }else {
+            $('.result')
+                .append($('<div>The average amout paid for services by subscriber with phone number:' + subscriber + '</div>'))
+                .append($('<div>For period: from ' + start + ' to ' + end + '</div>'))
+                .append($('<div>Amount: ' + data['Average sum'] + ' BGN</div>'));
+        } else {
             $('.result')
                 .append($('<div>No records for this period!</div>'));
         }
     })
-        .fail(function () {
-            $('.result')
-                .append($('<div>Invalid time period!</div>'));
+        .fail(function (data) {
+            if (data.getResponseHeader('Error') === 'Not valid phone number') {
+                var det = data.getResponseHeader('Error');
+                $('.result')
+                    .append('<div>' + det + '</div>');
+            } else if (data.getResponseHeader('Error') === 'No payment records for this period') {
+                var det = data.getResponseHeader('Error');
+                $('.result')
+                    .append('<div>' + det + '</div>');
+            } else {
+                $('.result')
+                    .append($('<div>Invalid action. Enter valid time period parameters!</div>'));
+            }
         });
     $("#phone-average").val('');
     $("#average-start-date").val('');
@@ -154,10 +174,10 @@ $('#btn-history').click(function (ev) {
             function goFun(sta, limit) {
                 for (var i = sta; i < limit; i++) {
 
-                    var $nr = $('<div>Bill ID: ' + response[i]['id'] + ', Service: ' + response[i]['service'] + 
-                    ', PayDate: ' + response[i]['payDate'] + ', Amount: ' + response[i]['amount'] + ' ' + response[i]['currency'] + 
-                    ' Subscriber:' + response[i]['subscriber']['firstName'] + ' ' + response[i]['subscriber']['lastName']+ 
-                    ',. Phone number: ' + response[i]['subscriber']['phoneNumber'] +'</div>');
+                    var $nr = $('<div>Bill ID: ' + response[i]['id'] + ', Service: ' + response[i]['service'] +
+                        ', PayDate: ' + response[i]['payDate'] + ', Amount: ' + response[i]['amount'] + ' ' + response[i]['currency'] +
+                        ' Subscriber:' + response[i]['subscriber']['firstName'] + ' ' + response[i]['subscriber']['lastName'] +
+                        ',. Phone number: ' + response[i]['subscriber']['phoneNumber'] + '</div>');
                     $('.result').append($nr);
                 }
             }
@@ -189,7 +209,7 @@ $('#btn-history').click(function (ev) {
             $('.result')
                 .append($('<div>Error accured!</div>'));
         });
-    
+
 });
 
 //get top 10 subscribers by biggest amount /for all bills/ paid DONE DONE DONE DONE DONE DONE DONE DONE
@@ -294,9 +314,9 @@ $('#btn-unpaid').click(function (ev) {
 });
 
 $('#btn-info, #btn-services, #btn-max, #btn-average, #btn-top-ten, #btn-pay, #btn-unpaid').click(
-    function(){
+    function () {
         $('#nextValue').hide();
-        $('#PreeValue').hide();  
+        $('#PreeValue').hide();
     }
 )
 
