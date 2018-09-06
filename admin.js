@@ -232,10 +232,10 @@ $('#delete-user').click(function(ev){
 //issue new bill
 $('#issue-thebill').click(function(ev){
     ev.preventDefault();
-    let $service = $('#service').val();
+    let $service = $('#cur').val();
     let $startDate = $('#datepicker1').val();
     let $endDate = $('#datepicker2').val();
-    let $phoneNumber = $('#phone').val();
+    let $phoneNumber = $('#cur1').val();
     let $amount = $('#amount').val();
     let $currency = $('#cur').val();
     if($service === undefined || $startDate === "" || $endDate === "" || $phoneNumber === undefined){
