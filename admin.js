@@ -242,7 +242,6 @@ $('#delete-user').click(function(ev){
 //issue new bill
 $('#newbill').click(function(ev){
     ev.preventDefault();
-    alert('Fires');
     let $service = $('#cur').val();
     let $startDate = $('#datepicker1').val();
     let $endDate = $('#datepicker2').val();
@@ -291,11 +290,7 @@ $('#newbill').click(function(ev){
         $('#modal-titlebill').text(result);
         $('#modal-textbill').text($errorMessage);
     });
-
 });
-
-
-
 //POPULATE PHONENUMBER FIELD
 $('#issuebill').click(function(ev){
     ev.preventDefault();
@@ -323,5 +318,19 @@ $('#issuebill').click(function(ev){
         $('#billModal').modal('show');
         $('#modal-titlebill').text('Check if you are admin!');
     });
+    $('#datepicker1').datepicker({
+        uiLibrary: 'bootstrap',
+        format: "yyyy-mm-dd",
+        changeMonth: true,
+        changeYear: true
+    });
+    $('#datepicker2').datepicker({
+        uiLibrary: 'bootstrap',
+        format: "yyyy-mm-dd",
+        changeMonth: true,
+        changeYear: true
+    });
+
+
 });
 
