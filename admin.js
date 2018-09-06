@@ -77,6 +77,7 @@ $('#sign-up-user').click(function(ev){
         $('#eikclient').val('');
         $('#modal-titleclient').empty();
         $('#modal-textclient').empty();
+        $('#clientModal').modal('show');
         $('#modal-titleclient').text('Successfully added new client');
         $('#modal-textclient').text(data.userName + ' added to the database');
     })
@@ -84,6 +85,7 @@ $('#sign-up-user').click(function(ev){
         $('#modal-titleclient').empty();
         $('#modal-textclient').empty();
         let $errorMessage = data.getResponseHeader('Error');
+        $('#clientModal').modal('show');
         $('#modal-titleclient').text(result);
         $('#modal-textclient').text($errorMessage);
     });
@@ -120,6 +122,7 @@ $('#sign-up-admin').click(function(ev){
         $('#emailadmin').val('');
         $('#modal-titleadmin').empty();
         $('#modal-textadmin').empty();
+        $('#adminModal').modal('show');
         $('#modal-titleadmin').text('Successfully added new admin');
         $('#modal-textadmin').text(data.userName + ' added to the database');
     })
@@ -127,6 +130,7 @@ $('#sign-up-admin').click(function(ev){
         $('#modal-titleadmin').empty();
         $('#modal-textadmin').empty();
         let $errorMessage = data.getResponseHeader('Error');
+        $('#adminModal').modal('show');
         $('#modal-titleadmin').text(result);
         $('#modal-textadmin').text($errorMessage);
     });
@@ -146,6 +150,7 @@ $('#update-client').click(function(ev){
         $newEnabled = 5;
     }
     if(typeof($newEik) === 'string' && $newEik !== ''){
+        $('#clientModal').modal('show');
         $('#modal-titleclient').text('Can not');
         $('#modal-textclient').text('accept a string value for EIK');
         return;
@@ -180,6 +185,7 @@ $('#update-client').click(function(ev){
         $('#enabledupdate').val('');
         $('#modal-titleclient').empty();
         $('#modal-textclient').empty();
+        $('#clientModal').modal('show');
         $('#modal-titleclient').text('Successful update');
         $('#modal-textclient').text('If you have changed the username new login is required');
     })
@@ -187,6 +193,7 @@ $('#update-client').click(function(ev){
         $('#modal-titleclient').empty();
         $('#modal-textclient').empty();
         let $errorMessage = data.getResponseHeader('Error');
+        $('#clientModal').modal('show');
         $('#modal-titleclient').text(result);
         $('#modal-textclient').text($errorMessage);
     });
@@ -200,6 +207,7 @@ $('#delete-user').click(function(ev){
     if($username !== $repeatUsername){
         $('#modal-titledel').empty();
         $('#modal-textdel').empty();
+        $('#delModal').modal('show');
         $('#modal-titledel').text('Be sure to match');
         $('#modal-textdel').text('both firedls!');
         return;
@@ -218,6 +226,7 @@ $('#delete-user').click(function(ev){
     .done(function(data, result, hxr){
         $('#modal-titledel').empty();
         $('#modal-textdel').empty();
+        $('#delModal').modal('show');
         $('#modal-titledel').text('Successful delete');
         $('#modal-textdel').text('of ' + data.userName + ' entry');
     })
@@ -225,22 +234,25 @@ $('#delete-user').click(function(ev){
         $('#modal-titledel').empty();
         $('#modal-textdel').empty();
         let $errorMessage = data.getResponseHeader('Error');
+        $('#delModal').modal('show');
         $('#modal-titledel').text(result);
         $('#modal-textdel').text($errorMessage);
     });
 });
 //issue new bill
-$('#issue-thebill').click(function(ev){
+$('#newbill').click(function(ev){
     ev.preventDefault();
+    alert('Fires');
     let $service = $('#cur').val();
     let $startDate = $('#datepicker1').val();
     let $endDate = $('#datepicker2').val();
     let $phoneNumber = $('#cur1').val();
     let $amount = $('#amount').val();
     let $currency = $('#cur').val();
-    if($service === undefined || $startDate === "" || $endDate === "" || $phoneNumber === undefined){
+    if($service === undefined || $startDate === "" || $endDate === "" || $phoneNumber === undefined){  
         $('#modal-titlebill').empty();
         $('#modal-textbill').empty();
+        $('#billModal').modal('show');
         $('#modal-titlebill').text('Error');
         $('#modal-textbill').text('Make sure all the dropdown fields are populated!');
         return;
@@ -267,6 +279,7 @@ $('#issue-thebill').click(function(ev){
     .done(function(data, result, hxr){
         $('#modal-titlebill').empty();
         $('#modal-textbill').empty();
+        $('#billModal').modal('show');
         $('#modal-titlebill').text('Success');
         $('#modal-textbill').text('bill with ID ' + data.id + ' created!');
     })
@@ -274,11 +287,15 @@ $('#issue-thebill').click(function(ev){
         $('#modal-titlebill').empty();
         $('#modal-textbill').empty();
         let $errorMessage = data.getResponseHeader('Error');
+        $('#billModal').modal('show');
         $('#modal-titlebill').text(result);
         $('#modal-textbill').text($errorMessage);
     });
 
 });
+
+
+
 //POPULATE PHONENUMBER FIELD
 $('#issuebill').click(function(ev){
     ev.preventDefault();
@@ -303,8 +320,8 @@ $('#issuebill').click(function(ev){
          })
     })
     .fail(function(data, result, hxr){
-       
+        $('#billModal').modal('show');
+        $('#modal-titlebill').text('Check if you are admin!');
     });
-
-
 });
+
