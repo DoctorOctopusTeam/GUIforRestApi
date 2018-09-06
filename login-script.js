@@ -1,5 +1,3 @@
-var auth = null;
-var role = null;
 
 $('#login-button').click(function (ev) {
     ev.preventDefault();
@@ -16,15 +14,17 @@ $('#login-button').click(function (ev) {
             "userName": userName,
             "password": password
         })
-    }).done(function (body) {
-            auth = body["Authorization"];
-            localStorage.setItem("token", auth);
-            role = body["Role"];
-            if (role === "[ROLE_USER]") {
-                window.location.href = "/user module/user.html";
+    }).done(function (body, t, xhr) {
+        var token = xhr.getResponseHeader('Authorization');
+        var role = xhr.getResponseHeader('Role');
+            localStorage.setItem("token", token);
+            if (role === "ROLE_USER") {
+                window.location.href = "http://localhost:8081/usermodule/user.html";
                 
-            } else {
-                window.location.href = "/admin.html";
+            }if(role === "ROLE_UNAUTHORIZEDADMIN") {
+                window.location.href = "http://localhost:8081/unauthorizedadmin.html";
+            } else if(role === "ROLE_ADMIN") {
+                window.location.href = "http://localhost:8081/admin.html";
             }
         
     })
