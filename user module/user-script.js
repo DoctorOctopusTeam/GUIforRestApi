@@ -292,7 +292,7 @@ $('#btn-unpaid').click(function (ev) {
             "Authorization": localStorage.getItem("token")
         }
     }).done(function (response) {
-        if (!jQuery.isEmptyObject(response)) {
+            if(response.length != 0){
             var toAppend = '';
             $.each(response, function (i, o) {
                 toAppend += '<div> Bill ID:' + o.id + ', Service:' + o.service + ', Amount: ' + o.amount +
@@ -301,14 +301,17 @@ $('#btn-unpaid').click(function (ev) {
             });
             $('.result')
                 .append(toAppend);
-        } else {
+        } else{
             $('.result')
-                .append($('<div>No unpaid bills for this subscriber.</div>'));
+                .append($('<div>No unpaid bills for this subscriber! </div>'));
         }
     })
-        .fail(function () {
-            $('.result')
-                .append($('<div>Error accured! Enter valid parameters!</div>'));
+        .fail(function (data) {
+            if (data.getResponseHeader('Error') === 'Not valid phone number') {
+                var det = data.getResponseHeader('Error');
+                $('.result')
+                    .append('<div>' + det + '</div>');
+            }
         });
     $("#unpaid-phone").val('');
 });
