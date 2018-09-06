@@ -238,6 +238,13 @@ $('#issue-thebill').click(function(ev){
     let $phoneNumber = $('#phone').val();
     let $amount = $('#amount').val();
     let $currency = $('#cur').val();
+    if($service === undefined || $startDate === "" || $endDate === "" || $phoneNumber === undefined){
+        $('#modal-titlebill').empty();
+        $('#modal-textbill').empty();
+        $('#modal-titlebill').text('Error');
+        $('#modal-textbill').text('Make sure all the dropdown fields are populated!');
+        return;
+    }
     let $url = 'http://localhost:8080/admin/issuebill?subscriber=' + $phoneNumber;
     let $token = localStorage.getItem("token");
     let $data = JSON.stringify({
@@ -272,7 +279,7 @@ $('#issue-thebill').click(function(ev){
     });
 
 });
-//------------------
+//POPULATE PHONENUMBER FIELD
 $('#issuebill').click(function(ev){
     ev.preventDefault();
     let $url = 'http://localhost:8080/admin/subscribers'
