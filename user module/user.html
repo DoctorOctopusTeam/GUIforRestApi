@@ -8,8 +8,8 @@
 </head>
 
 <body>
-    <h2>Welcome to user module pannel of NGP Payment System</h2>
-    <h3>User's options:</h3>
+    <h2>Welcome to user module of NGP Payment System</h2>
+    
 
     <table>
         <tr>
@@ -19,10 +19,10 @@
 
         <tr>
             <td>
-                <label>Get history of payments for all subscribers </label>
+                <label>Get list of payments from all subscribers ordered by Pay date</label>
             </td>
             <td>
-                <input id="get-history" type="button" value="Get" />
+                <input id="btn-history" type="submit" value="Get" />
             </td>
 
         </tr>
@@ -32,7 +32,7 @@
                 <label>Get TOP 10 subscribers by the amount of payments made </label>
             </td>
             <td>
-                <input id="get-top-ten" type="button" value="Get" />
+                <input id="btn-top-ten" type="submit" value="Get" />
             </td>
 
         </tr>
@@ -40,7 +40,7 @@
         <tr>
             <td>
                 <label>Get subscriber's info </label>
-                <input id="phone-info" type="number" placeholder="enter phone number" />
+                <input id="phone-info" type="number" placeholder="Enter phone number" />
             </td>
             <td>
                 <input id="btn-info" type="submit" value="Get" />
@@ -52,7 +52,7 @@
             <td>
                 <label>Get all services used by a subscriber </label>
 
-                <input id="phone-services" type="number" placeholder="enter phone number" />
+                <input id="phone-services" type="number" placeholder="Enter phone number" />
             </td>
             <td>
                 <input id="btn-services" type="submit" value="Get" />
@@ -62,10 +62,12 @@
 
         <tr>
             <td>
-                <label>Get max paid bills by a subscriber for a defined period </label>
-                <input id="phone-max" type="number" placeholder="enter phone number" />
-                <input id="max-start-date" type="text" placeholder="enter start date" />
-                <input id="max-end-date" type="text" placeholder="enter end date" />
+                <label>Get the biggest bill paid by a subscriber for a defined period </label>
+                <input id="phone-max" type="number" placeholder="Enter phone number" />
+                <label>From:</label>
+                <input id="max-start-date" type="text" placeholder="yyyy-mm-dd" />
+                <label>To:</label>
+                <input id="max-end-date" type="text" placeholder="yyyy-mm-dd" />
             </td>
             <td>
                 <input id="btn-max" type="submit" value="Get" />
@@ -76,9 +78,11 @@
         <tr>
             <td>
                 <label>Get average amount paid by a subcriber for a defined period </label>
-                <input id="phone-average" type="number" placeholder="enter phone number" />
-                <input id="average-start-date" type="text" placeholder="enter start date" />
-                <input id="average-end-date" type="text" placeholder="enter end date" />
+                <input id="phone-average" type="number" placeholder="Enter phone number" />
+                <label>From:</label>
+                <input id="average-start-date" type="text" placeholder="yyyy-mm-dd" />
+                <label>To:</label>
+                <input id="average-end-date" type="text" placeholder="yyyy-mm-dd" />
             </td>
             <td>
                 <input id="btn-average" type="submit" value="Get" />
@@ -88,11 +92,22 @@
 
         <tr>
             <td>
-                <label>Pay particular bill </label>
-                <input id="bill-id" type="number" placeholder="enter bill's ID" />
+                <label>Get list ot unpaid bills of a subscriber </label>
+                <input id="unpaid-phone" type="number" placeholder="Enter phone number" />
             </td>
             <td>
-                <input id="bnt-pay" type="submit" value="Pay" />
+                <input id="btn-unpaid" type="submit" value="Get" />
+            </td>
+
+        </tr>
+
+        <tr>
+            <td>
+                <label>Pay particular bill </label>
+                <input id="bill-id" type="number" placeholder="Enter bill's ID" />
+            </td>
+            <td>
+                <input id="btn-pay" type="submit" value="Pay" />
             </td>
 
         </tr>
@@ -102,6 +117,8 @@
     <div class="result">
 
     </div>
+    <button id="nextValue" style="display: none"> Next</button> 
+    <button id="PreeValue" value='Prev' style="display: none"> Prev </button>
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
