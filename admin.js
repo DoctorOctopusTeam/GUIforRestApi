@@ -230,7 +230,7 @@ $('#delete-user').click(function(ev){
     });
 });
 //issue new bill
-$('#issue').click(function(ev){
+$('#issue-thebill').click(function(ev){
     ev.preventDefault();
     let $service = $('#service').val();
     let $startDate = $('#datepicker1').val();
@@ -270,5 +270,34 @@ $('#issue').click(function(ev){
         $('#modal-titlebill').text(result);
         $('#modal-textbill').text($errorMessage);
     });
+
+});
+//------------------
+$('#issuebill').click(function(ev){
+    ev.preventDefault();
+    let $url = 'http://localhost:8080/admin/subscribers'
+    let $token = localStorage.getItem("token");
+    $.ajax({
+        type:'GET',
+        url:$url,
+        headers: {
+            "Authorization" : $token
+        },
+        dataType: 'json',
+        contentType: 'application/json'
+    })
+    .done(function(data, result, hxr){
+        let $controlvariable = data[3].phoneNumber;
+        $.each(data, function (key, value){
+            let $phone = data[key].phoneNumber;
+            $('#cur1').append($('<option>', {
+                text:$phone
+            }))
+         })
+    })
+    .fail(function(data, result, hxr){
+       
+    });
+
 
 });
