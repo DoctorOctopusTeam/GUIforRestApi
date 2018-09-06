@@ -83,7 +83,7 @@ $('#btn-max').click(function (ev) {
                 .append($('<div>Amount: ' + data['amount'] + ' ' + data['currency'] + '</div>'));
         } else {
             $('.result')
-                .append($('<div>Invalid action. Enter valid phone number!</div>'));
+                .append($('<div>No records for this period!</div>'));
         }
     })
         .fail(function () {
@@ -122,7 +122,7 @@ $('#btn-average').click(function (ev) {
     })
         .fail(function () {
             $('.result')
-                .append($('<div>Invalid subscriber phone number or time period!</div>'));
+                .append($('<div>Invalid time period!</div>'));
         });
     $("#phone-average").val('');
     $("#average-start-date").val('');
@@ -272,18 +272,19 @@ $('#btn-unpaid').click(function (ev) {
             "Authorization": localStorage.getItem("token")
         }
     }).done(function (response) {
-        if (!jQuery.isEmptyObject(response) && response) {
+        if (!jQuery.isEmptyObject(response)) {
             var toAppend = '';
             $.each(response, function (i, o) {
                 toAppend += '<div> Bill ID:' + o.id + ', Service:' + o.service + ', Amount: ' + o.amount +
                     ' ' + o.currency + ', Name: ' + o.subscriber.firstName + ' ' + o.subscriber.lastName + ', Phone number: ' +
                     o.subscriber.phoneNumber + '</div>';
             });
+            $('.result')
+                .append(toAppend);
         } else {
             $('.result')
                 .append($('<div>No unpaid bills for this subscriber.</div>'));
         }
-        $('.result').append(toAppend);
     })
         .fail(function () {
             $('.result')
@@ -291,4 +292,11 @@ $('#btn-unpaid').click(function (ev) {
         });
     $("#unpaid-phone").val('');
 });
+
+$('#btn-info, #btn-services, #btn-max, #btn-average, #btn-top-ten, #btn-pay, #btn-unpaid').click(
+    function(){
+        $('#nextValue').hide();
+        $('#PreeValue').hide();  
+    }
+)
 

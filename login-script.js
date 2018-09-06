@@ -1,9 +1,11 @@
 var auth = null;
 var role = null;
+
 $('#login-button').click(function (ev) {
     ev.preventDefault();
     var userName = $('#username').val();
     var password = $('#password').val();
+
     $.ajax({
         type: 'POST',
         url: 'http://localhost:8080/login',
