@@ -366,6 +366,11 @@ $('#clearreports').click(function (ev) {
     ev.preventDefault();
     $('#result').css('display', 'none');
 });
+$('#logout').click(function(ev){
+    ev.preventDefault();
+    localStorage.clear();
+    window.location.href = 'http://localhost:8081/logout.html';
+});
 //function to list users
 function listAll(role) {
     let $url = 'http://localhost:8080/admin/listall/' + role;
