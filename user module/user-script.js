@@ -17,19 +17,15 @@ $('#btn-info').click(function (ev) {
                 + data.egn + '</td></tr>';
             $('.result table').append(ee);
         } else {
-
             modal.style.display = "block";
             $('#myModal p').text('Invalid phone number!');
-
         }
-    })
-        //TODO add effects ot this             
+    })      
         .fail(function () {
             modal.style.display = "block";
             $('#myModal p').text('Error occured!');
         });
     $("#phone-info").val('');
-
 });
 
 //get subcriber services 
@@ -51,9 +47,8 @@ $('#btn-services').click(function (ev) {
             $.each(data, function (i, o) {
                 $('.result table')
                     .append($('<tr><td>' + data[i] + '</td></tr>'));;
-
             });
-        } else {                //TODO - add effect here
+        } else {                
             modal.style.display = "block";
             $('#myModal p').text('Invalid action. Enter valid phone number!');
         }
@@ -87,7 +82,7 @@ $('#btn-max').click(function (ev) {
                 start + ' - ' + end + '</td><td>' + subscriber + '</td>';
             $('.result table')
                 .append(vv);
-        } else {                //TODO add effects here
+        } else {                
             modal.style.display = "block";
             $('#myModal p').text('No records for this period!');
         }
@@ -131,7 +126,7 @@ $('#btn-average').click(function (ev) {
                 start + ' - ' + end + '</td><td>' + subscriber + '</td>';
             $('.result table')
                 .append(vv);
-        } else {                    //TODO add effect here
+        } else {                    
             $('.result')
                 .append($('<div>No records for this period!</div>'));
         }
@@ -153,7 +148,7 @@ $('#btn-average').click(function (ev) {
     $("#average-end-date").val('');
 });
 
-//get history of payments DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE
+//get history of payments
 $('#btn-history').click(function (ev) {
     ev.preventDefault();
     $(".result").html("");
@@ -185,7 +180,6 @@ $('#btn-history').click(function (ev) {
                         '</td><td>' + response[i]['subscriber']['phoneNumber'] + '</td></tr>');
                     $('.result table').append($nr);
                 }
-
             }
 
             $('#nextValue').click(function () {
@@ -213,12 +207,12 @@ $('#btn-history').click(function (ev) {
 
         .fail(function () {
             modal.style.display = "block";
-                $('#myModal p').text('Error ');
+            $('#myModal p').text('Error ');
         });
 
 });
 
-//get top 10 subscribers by biggest amount /for all bills/ paid DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE
+//get top 10 subscribers by biggest amount /for all bills/ paid 
 $('#btn-top-ten').click(function (ev) {
     ev.preventDefault();
     $(".result").html("");
@@ -237,6 +231,7 @@ $('#btn-top-ten').click(function (ev) {
                 toAppend += '<tr><td>' + o.amount + ' BGN</td><td>' + o.firstName + '</td><td>' + o.lastName + '</td><td>'
                     + o.phoneNumber + '</td></tr>';
             });
+            $('.result').append(toAppend);
 
         } else {
             modal.style.display = "block";
@@ -244,8 +239,8 @@ $('#btn-top-ten').click(function (ev) {
         }
     })
         .fail(function () {
-           modal.style.display = "block";
-                $('#myModal p').text('Error occured!');
+            modal.style.display = "block";
+            $('#myModal p').text('Error occured!');
         });
 });
 
@@ -266,18 +261,21 @@ $('#btn-pay').click(function (ev) {
             "id": id
         })
     }).done(function (data) {
-        if (data === 'Paid') {
-            $('.result').append('Bill with ID: ' + id + ' was paid!');
-        } else if (data === 'Already paid') {
-            $('.result').append('Bill with ID: ' + id + ' is already paid.');
-        } else if (jQuery.isEmptyObject(data)) {
-            $('.result').append('Invalid action. Enter valid Bill ID!');
+        if (data['payDate'] != null) {
+            $('.result')
+                .append($('<table><tr><th>Bill ID</th><th>Amount paid</th><th>Pay date</th><th>Phone number</th></tr></table>'));
+            var pp = '<tr><td>' + data.id + '</td><td>' + data.amount + ' ' + data.currency + '</td><td>Just now</td><td>' + data.subscriber.phoneNumber + '</td>';
+            $('.result table').append(pp);
+            modal.style.display = "block";
+            $('#myModal p').text('You have just paid a bill with ID ' + id + '!');
+        } else {
+            modal.style.display = "block";
+            $('#myModal p').text('Not valid bill ID!');
         }
-
     })
         .fail(function () {
             modal.style.display = "block";
-            $('#myModal p').text('Enter valid parameters!');
+            $('#myModal p').text('Error occured!');
         });
     $("#bill-id").val('');
 });
@@ -307,7 +305,7 @@ $('#btn-unpaid').click(function (ev) {
                 .append(toAppend);
         } else {
             modal.style.display = "block";
-                $('#myModal p').text('No unpaid bill for this subscriber!');
+            $('#myModal p').text('No unpaid bill for this subscriber!');
         }
     })
         .fail(function (data) {
