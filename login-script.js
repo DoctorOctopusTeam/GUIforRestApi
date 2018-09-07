@@ -24,7 +24,7 @@ $('#login-button').click(function (ev) {
             }if(role === "ROLE_UNAUTHORIZEDADMIN") {
                 window.location.href = "http://localhost:8081/unauthorizedadmin.html";
             } else if(role === "ROLE_ADMIN") {
-                window.location.href = "http://localhost:8081/admin.html";
+                window.location.href = "http://http://localhost:8081/adminmodule/admin.html";
             }
         
     })
