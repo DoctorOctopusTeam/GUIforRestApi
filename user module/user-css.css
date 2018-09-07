@@ -51,7 +51,7 @@ h1{
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
+    padding-top: 500px; /* Location of the box */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
@@ -59,6 +59,7 @@ h1{
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    
 }
 
 /* Modal Content */
@@ -67,7 +68,14 @@ h1{
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%;
+    width: 30%;
+    height: 10%;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    font-family: arial, sans-serif;
+    text-align: center;
 }
 
 /* The Close Button */
