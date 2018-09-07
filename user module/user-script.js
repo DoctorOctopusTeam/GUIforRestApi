@@ -226,13 +226,13 @@ $('#btn-top-ten').click(function (ev) {
         }
     }).done(function (response) {
         if (!jQuery.isEmptyObject(Response)) {
-            var toAppend = '';
+            var toAppend = '<table><tr><th>Amount paid</th><th>First Name</th><th>Last Name</th><th>Phone Number</th></tr>';
             $.each(response, function (i, o) {
-                toAppend += '<div>Amount: ' + o.amount +
-                    ' BGN' + ', Name: ' + o.firstName + ' ' + o.lastName + ', Phone number: ' +
-                    o.phoneNumber + '</div>';
+                toAppend +='<tr><td>'+ o.amount + ' BGN</td><td>'+ o.firstName + '</td><td>'+ o.lastName + '</td><td>'
+                + o.phoneNumber + '</td></tr>';
+                
             });
-
+            toAppend += '</table>'
         } else {
             $('.result')
                 .append($('<div>No payment records available!</div>'));
