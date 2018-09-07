@@ -12,18 +12,16 @@
   <link href="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/css/gijgo.min.css" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" type="text/css" href="admincss.css">
   <script src="admin.js" async></script> -->
-
   <link rel="stylesheet" href="css/bootstrap.min.css">
-  <script src="jquery-3.3.1.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/js/gijgo.min.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.css">
   <link href="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/css/gijgo.min.css" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" type="text/css" href="admincss.css">
-  <script src="admin.js" async></script>
 
-
+  <script src="jquery-3.3.1.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.js"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/js/gijgo.min.js" type="text/javascript"></script>
   
-
 
 <body background="background-telecom.jpg">
 
@@ -38,6 +36,9 @@
     <button type="button" class="btn btn-default" id="updatecredentials">UPDATE CREDENTIALS</button>
     <button type="button" class="btn btn-default" id="deleteuser">DELETE USER</button>
     <button type="button" class="btn btn-default" id="issuebill">ISSUE BILL</button>
+    <button type="button" class="btn btn-default" id="listadmins">LIST OF ADMINS</button>
+    <button type="button" class="btn btn-default" id="listclients">LIST OF CLIENTS</button>
+    <button type="button" class="btn btn-default" id="clearreports">CLEAR REPORT</button>
   </div>
 
   <div class="cube" id="cube1">
@@ -67,7 +68,7 @@
         <input type="email" class="inputs" id="eikclient" placeholder="Enter eik"><br>
       </li><br><br><br><br><br>
       <div style="clear: both"></div>
-      <hr>
+      <hr class="lowerhr">
       <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#clientModal" id="sign-up-user"
         style="color: black">Sign up new client</button> -->
         <button type="button" class="btn btn-info btn-lg" data-toggle="modal" id="sign-up-user"
@@ -102,7 +103,7 @@
         <input type="email" class="inputs" id="emailadmin" placeholder="Enter email"><br>
       </li><br><br><br><br><br><br><br>
       <div style="clear: both"></div>
-      <hr>
+      <hr class="lowerhr">
       <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#adminModal" id="sign-up-admin"
         style="color: black">Sign up new admin</button> -->
         <button type="button" class="btn btn-info btn-lg" data-toggle="modal" id="sign-up-admin"
@@ -146,7 +147,7 @@
         <input type="text" class="inputs" id="emailupdate" placeholder="Enter new email"><br>
       </li><br>
       <div style="clear: both"></div>
-      <hr>
+      <hr class="lowerhr">
       <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#clientModal" id="update-client"
         style="color: black">Update Credentials</button> -->
         <button type="button" class="btn btn-info btn-lg" data-toggle="modal" id="update-client"
@@ -169,7 +170,7 @@
         <input type="text" class="inputs" id="usernamedeleterepeat" placeholder="Enter username"><br>
       </li><br>
       <div style="clear: both"></div>
-      <hr>
+      <hr class="lowerhr">
       <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#delModal" id="delete-user"
         style="color: red">Delete user</button> -->
         <button type="button" class="btn btn-info btn-lg" data-toggle="modal"  id="delete-user"
@@ -186,81 +187,55 @@
     <ul>
       <li>
         <label class="floatleft">Service</label>
-        <select class="inputs" id="cur" style="height: 23px">
-          <option value="volvo">Internet</option>
-          <option value="saab">Tv</option>
-          <option value="vw">Tv+Internet</option>
-          <option value="audi">Phone</option>
-          <option value="audi" selected>-</option>
+        <select class="inputs" id="service" style="height: 23px">
+          <option >Internet</option>
+          <option >Tv</option>
+          <option >Tv+Internet</option>
+          <option >Phone</option>
+          <option selected>-</option>
         </select><br><br>
         <!-- <input type="text" class="inputs" id="service" placeholder="Enter service"><br><br> -->
         <label class="floatleft">Start date</label>
-        <input type="text" class="inputs" id="datepicker1" width="220" placeholder="20/20/2020"><br>
+        <input type="text" class="inputs" id="datepicker1" width="220" placeholder="YYYY-MM-DD"><br>
         <label class="floatleft">End date</label>
-        <input type="text" class="inputs" id="datepicker2" width="220" placeholder="2020/20/20"><br>
+        <input type="text" class="inputs" id="datepicker2" width="220" placeholder="YYYY-MM-DD"><br>
         <!-- <label class="floatleft">Phone number</label>
         <input type="text" class="inputs" id="phone" placeholder="Enter phonenumber"><br><br> -->
-
         <label class="floatleft">Phonenumber</label>
         <select class="inputs" id="cur1" style="height: 23px">
-          <option >-</option>
-
-
+          <option selected>-</option>
         </select><br><br>
-
         <label class="floatleft">Amount</label>
         <input type="text" class="inputs" id="amount" placeholder="Enter currency"><br><br>
         <label class="floatleft">Currency</label>
-        <select class="inputs" id="cur" style="height: 23px">
-          <option value="volvo">BGN</option>
-          <option value="saab">EUR</option>
-          <option value="vw">USD</option>
-          <option value="audi">CHF</option>
-          <option value="audi" selected>-</option>
+        <select class="inputs" id="currency" style="height: 23px">
+          <option >BGN</option>
+          <option >EUR</option>
+          <option >USD</option>
+          <option >CHF</option>
+          <option selected>-</option>
         </select><br><br>
       </li><br>
       <div style="clear: both"></div>
-      <hr>
+      <hr class="lowerhr">
         <button type="button" class="btn btn-info btn-lg" data-toggle="modal" id="newbill" style="color:black">Issue new bill</button>
     </ul>
   </div>
-
-  <!-- <div class="result" id="result-one">  
-        </div>
-
-        <div  class="cube">
-        </div>
-        <div  class="cube">
-        </div>
-
-        <div class="result">
-        </div>
-
-        <div  class="cube">
-        </div>
-        <div  class="cube">
-        </div>
-        <div  class="cube">           
-        </div>
-
-        <div class="result">
-        </div> -->
-
-
-
-  <!-- <table class=".table table-bordered table-hover" style="width: 50%;background-color: red;">
-        <tr>
-            <td >asdfghj</td>
-            <td >vbnm</td>
-            <td >asdfgh</td>
-          </tr>
-          <tr>
-            <td class="active">asdfghj</td>
-            <td class="success">vbnm</td>
-            <td class="warning">asdfgh</td>
-          </tr>
-      </table>
-      <div style="width: 40%;background-color: blue;height: 40px;", ></div> -->
+  <!-- style="background-color:#337ab7;color:white;border-radius: 3px;" -->
+  <div class="result" id="result">  
+      <div class="container" style="text-align: center"><h3 id="typeofreports"></h3>           
+          <table id="res" class="table table-hover" >
+              <thead>
+                  <tr>
+                    <th data-field="userName">Username</th>
+                    <th data-field="enabled">Is enabled</th>
+                    <th data-field="details">Details</th>
+                    <th data-field="email">Email</th>
+                  </tr>
+                </thead>
+          </table>
+      </div>
+  </div>
 
 
   <!-- CLIENT MODAL -->
@@ -283,7 +258,7 @@
   </div>
   <!-- bill modal -->
   <div class="modal fade" id="billModal" role="dialog">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <h4 class="modal-title" id="modal-titlebill"></h4>
@@ -300,7 +275,7 @@
   </div>
   <!-- DEL MODAL -->
   <div class="modal fade" id="delModal" role="dialog">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <h4 class="modal-title" id="modal-titledel"></h4>
@@ -336,15 +311,12 @@
   <div class="modal fade" id="querymodal" role="dialog">
     <div class="modal-dialog">
       <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title" id="tit"></h4>
-          <label style="margin-left: 35px">Password</label>
-          <input type="password" style="margin-left: 100px" id="initialpass" placeholder="Enter new password"><br>
-          <label style="margin-left: 35px">Password</label>
-          <input type="password" style="margin-left: 100px" id="initialpasss" placeholder="Enter new password"><br>
+        <div class="modal-header" id="qtit">
+          <h4 class="modal-title"></h4>
         </div>
-        <div class="modal-body" id="tex">
-          <p></p>
+        <div class="modal-body" >
+          <div class="container" id="qtex">
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" id="change-password-btn">Send</button>
@@ -353,6 +325,7 @@
     </div>
   </div>
 
-  
+  <script src="admin.js" async></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.js"></script>
 </body>
 </html>
