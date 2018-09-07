@@ -12,20 +12,21 @@ $('#btn-info').click(function (ev) {
         }
     }).done(function (data) {
         if (data['phoneNumber'] == subscriber) {
-            $('.result')
-                .append($('<div>Details for Subscriber with Phone nomer:' + data['phoneNumber'] + '</div>'))
-                .append($('<div>First name:' + data['firstName'] + '</div>'))
-                .append($('<div>Last name:' + data['lastName'] + '</div>'))
-                .append($('<div>EGN:' + data['egn'] + '</div>'));
+            $('.result').append('<table><tr><th>Phone number</th><th>First Name</th><th>Last Name</th><th>EGN</th></tr>');
+            var ee = '<tr><td>' + data.phoneNumber + '</td><td>' + data.firstName + '</td><td>' + data.lastName + '</td><td>'
+                + data.egn + '</td></tr>';
+            $('.result table').append(ee);
         } else {
-            $('.result')
-                .append($('<div>Invalid subscriber phone number!</div>'));
+
+            modal.style.display = "block";
+            $('#myModal p').text('Invalid phone number!');
+
         }
     })
-
+        //TODO add effects ot this             
         .fail(function () {
-            $('.result')
-                .append($('<div>Error accured!</div>'));
+            modal.style.display = "block";
+            $('#myModal p').text('Error occured!');
         });
     $("#phone-info").val('');
 
@@ -46,16 +47,20 @@ $('#btn-services').click(function (ev) {
     }).done(function (data) {
         if (!jQuery.isEmptyObject(data)) {
             $('.result')
-                .append($('<div>Details for used services by Subscriber with Phone nomer:' + subscriber + '</div>'))
-                .append($('<div>' + data + '</div>'))
-        } else {
-            $('.result')
-                .append($('<div>Invalid action. Enter valid phone number!</div>'));
+                .append($('<table><tr><th>Used services by subscriber - phone number: ' + subscriber + '</th></tr>'));
+            $.each(data, function (i, o) {
+                $('.result table')
+                    .append($('<tr><td>' + data[i] + '</td></tr>'));;
+
+            });
+        } else {                //TODO - add effect here
+            modal.style.display = "block";
+            $('#myModal p').text('Invalid action. Enter valid phone number!');
         }
     })
         .fail(function () {
-            $('.result')
-                .append($('<div>Error accured!</div>'));
+            modal.style.display = "block";
+            $('#myModal p').text('Error occured!');
         });
     $("#phone-services").val('');
 });
@@ -77,27 +82,26 @@ $('#btn-max').click(function (ev) {
     }).done(function (data) {
         if (!jQuery.isEmptyObject(data)) {
             $('.result')
-                .append($('<div>The biggest amout paid for service by subscriber with phone number:' + subscriber + '</div>'))
-                .append($('<div>For period: from ' + start + ' to ' + end + '</div>'))
-                .append($('<div>Service: ' + data['service'] + '</div>'))
-                .append($('<div>Amount: ' + data['amount'] + ' ' + data['currency'] + '</div>'));
-        } else {
-            $('.result')
-                .append($('<div>No records for this period!</div>'));
+                .append($('<table><tr><th>Largest amount</th><th>For service</th><th>Time period</th><th>Phone number</th></tr></table>'));
+            var vv = '<tr><td>' + data.amount + ' BGN</td><td>' + data.service + '</td><td>' +
+                start + ' - ' + end + '</td><td>' + subscriber + '</td>';
+            $('.result table')
+                .append(vv);
+        } else {                //TODO add effects here
+            modal.style.display = "block";
+            $('#myModal p').text('No records for this period!');
         }
     })
         .fail(function (data) {
             if (data.getResponseHeader('Error') === 'Not valid phone number') {
-                var det = data.getResponseHeader('Error');
-                $('.result')
-                    .append('<div>' + det + '</div>');
+                modal.style.display = "block";
+                $('#myModal p').text('Not valid phone number!');
             } else if (data.getResponseHeader('Error') === 'No payment records for this period') {
-                var det = data.getResponseHeader('Error');
-                $('.result')
-                    .append('<div>' + det + '</div>');
+                modal.style.display = "block";
+                $('#myModal p').text('No payment records for this period');
             } else {
-                $('.result')
-                    .append($('<div>Invalid action. Enter valid time period parameters!</div>'));
+                modal.style.display = "block";
+                $('#myModal p').text('Invalid action! Enter valid time period!');
             }
         });
     $("#phone-max").val('');
@@ -122,26 +126,26 @@ $('#btn-average').click(function (ev) {
     }).done(function (data) {
         if (!jQuery.isEmptyObject(data)) {
             $('.result')
-                .append($('<div>The average amout paid for services by subscriber with phone number:' + subscriber + '</div>'))
-                .append($('<div>For period: from ' + start + ' to ' + end + '</div>'))
-                .append($('<div>Amount: ' + data['Average sum'] + ' BGN</div>'));
-        } else {
+                .append($('<table><tr><th>Average amount</th><th>Time period</th><th>Phone number</th></tr></table>'));
+            var vv = '<tr><td>' + data['Average sum'] + ' BGN</td><td>' +
+                start + ' - ' + end + '</td><td>' + subscriber + '</td>';
+            $('.result table')
+                .append(vv);
+        } else {                    //TODO add effect here
             $('.result')
                 .append($('<div>No records for this period!</div>'));
         }
     })
         .fail(function (data) {
             if (data.getResponseHeader('Error') === 'Not valid phone number') {
-                var det = data.getResponseHeader('Error');
-                $('.result')
-                    .append('<div>' + det + '</div>');
+                modal.style.display = "block";
+                $('#myModal p').text('Not valid phone number!');
             } else if (data.getResponseHeader('Error') === 'No payment records for this period') {
-                var det = data.getResponseHeader('Error');
-                $('.result')
-                    .append('<div>' + det + '</div>');
+                modal.style.display = "block";
+                $('#myModal p').text('No payment records for this period');
             } else {
-                $('.result')
-                    .append($('<div>Invalid action. Enter valid time period parameters!</div>'));
+                modal.style.display = "block";
+                $('#myModal p').text('Invalid action! Enter valid time period!');
             }
         });
     $("#phone-average").val('');
@@ -181,7 +185,7 @@ $('#btn-history').click(function (ev) {
                         '</td><td>' + response[i]['subscriber']['phoneNumber'] + '</td></tr>');
                     $('.result table').append($nr);
                 }
-        
+
             }
 
             $('#nextValue').click(function () {
@@ -202,14 +206,14 @@ $('#btn-history').click(function (ev) {
                 }
             });
         } else {
-            $('.result')
-                .append($('<div>No payment records available!</div>'));
+            modal.style.display = "block";
+            $('#myModal p').text('No payment records for this period');
         }
     })
 
         .fail(function () {
-            $('.result')
-                .append($('<div>Error accured!</div>'));
+            modal.style.display = "block";
+                $('#myModal p').text('Error ');
         });
 
 });
@@ -232,19 +236,16 @@ $('#btn-top-ten').click(function (ev) {
             $.each(response, function (i, o) {
                 toAppend += '<tr><td>' + o.amount + ' BGN</td><td>' + o.firstName + '</td><td>' + o.lastName + '</td><td>'
                     + o.phoneNumber + '</td></tr>';
-
             });
-            toAppend += '</table>'
-        } else {
-            $('.result')
-                .append($('<div>No payment records available!</div>'));
-        }
 
-        $('.result').append(toAppend);
+        } else {
+            modal.style.display = "block";
+            $('#myModal p').text('No payment records for this period');
+        }
     })
         .fail(function () {
-            $('.result')
-                .append($('<div>Error accured!</div>'));
+           modal.style.display = "block";
+                $('#myModal p').text('Error occured!');
         });
 });
 
@@ -275,8 +276,8 @@ $('#btn-pay').click(function (ev) {
 
     })
         .fail(function () {
-            $('.result')
-                .append($('<div>Error accured! Enter valid parameters!</div>'));
+            modal.style.display = "block";
+            $('#myModal p').text('Enter valid parameters!');
         });
     $("#bill-id").val('');
 });
@@ -295,24 +296,24 @@ $('#btn-unpaid').click(function (ev) {
         }
     }).done(function (response) {
         if (response.length != 0) {
-            var toAppend = '';
+            var toAppend = '<table><tr><th>Unpaid Bill ID</th><th>For service</th><th>Amount to pay</th><th>First Name</th><th>Last Name</th><th>Phone Number</th></tr>';
             $.each(response, function (i, o) {
-                toAppend += '<div> Bill ID:' + o.id + ', Service:' + o.service + ', Amount: ' + o.amount +
-                    ' ' + o.currency + ', Name: ' + o.subscriber.firstName + ' ' + o.subscriber.lastName + ', Phone number: ' +
-                    o.subscriber.phoneNumber + '</div>';
+                toAppend += '<tr><td>' + response[i]['id'] + '</td><td>' + response[i]['service'] + '</td><td>' + response[i]['amount'] + ' '
+                    + response[i]['currency'] + '</td><td>' + response[i]['subscriber']['firstName'] + '</td><td>'
+                    + response[i]['subscriber']['lastName'] + '</td><td>' + phone + '</td></tr>';
+
             });
             $('.result')
                 .append(toAppend);
         } else {
-            $('.result')
-                .append($('<div>No unpaid bills for this subscriber! </div>'));
+            modal.style.display = "block";
+                $('#myModal p').text('No unpaid bill for this subscriber!');
         }
     })
         .fail(function (data) {
             if (data.getResponseHeader('Error') === 'Not valid phone number') {
-                var det = data.getResponseHeader('Error');
-                $('.result')
-                    .append('<div>' + det + '</div>');
+                modal.style.display = "block";
+                $('#myModal p').text('Not valid phone number!');
             }
         });
     $("#unpaid-phone").val('');
@@ -324,4 +325,12 @@ $('#btn-info, #btn-services, #btn-max, #btn-average, #btn-top-ten, #btn-pay, #bt
         $('#PreeValue').hide();
     }
 )
+
+var modal = document.getElementById('myModal');
+var span = document.getElementsByClassName("close")[0];
+span.onclick = function () {
+    modal.style.display = "none";
+}
+
+
 
