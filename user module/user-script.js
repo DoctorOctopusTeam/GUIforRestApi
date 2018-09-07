@@ -1,4 +1,4 @@
-//get subscriber info DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE 
+//get subscriber info  
 $('#btn-info').click(function (ev) {
     ev.preventDefault();
     $(".result").html("");
@@ -31,7 +31,7 @@ $('#btn-info').click(function (ev) {
 
 });
 
-//get subcriber services DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE 
+//get subcriber services 
 $('#btn-services').click(function (ev) {
     ev.preventDefault();
     $(".result").html("");
@@ -60,7 +60,7 @@ $('#btn-services').click(function (ev) {
     $("#phone-services").val('');
 });
 
-//get max bill paid by subscriber for period  DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE
+//get max bill paid by subscriber for period  
 $('#btn-max').click(function (ev) {
     ev.preventDefault();
     $(".result").html("");
@@ -86,26 +86,26 @@ $('#btn-max').click(function (ev) {
                 .append($('<div>No records for this period!</div>'));
         }
     })
-    .fail(function (data) {
-        if (data.getResponseHeader('Error') === 'Not valid phone number') {
-            var det = data.getResponseHeader('Error');
-            $('.result')
-                .append('<div>' + det + '</div>');
-        } else if (data.getResponseHeader('Error') === 'No payment records for this period') {
-            var det = data.getResponseHeader('Error');
-            $('.result')
-                .append('<div>' + det + '</div>');
-        } else {
-            $('.result')
-                .append($('<div>Invalid action. Enter valid time period parameters!</div>'));
-        }
-    });
+        .fail(function (data) {
+            if (data.getResponseHeader('Error') === 'Not valid phone number') {
+                var det = data.getResponseHeader('Error');
+                $('.result')
+                    .append('<div>' + det + '</div>');
+            } else if (data.getResponseHeader('Error') === 'No payment records for this period') {
+                var det = data.getResponseHeader('Error');
+                $('.result')
+                    .append('<div>' + det + '</div>');
+            } else {
+                $('.result')
+                    .append($('<div>Invalid action. Enter valid time period parameters!</div>'));
+            }
+        });
     $("#phone-max").val('');
     $("#max-start-date").val('');
     $("#max-end-date").val('');
 });
 
-//get average of payments DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE
+//get average of payments 
 $('#btn-average').click(function (ev) {
     ev.preventDefault();
     $(".result").html("");
@@ -149,7 +149,7 @@ $('#btn-average').click(function (ev) {
     $("#average-end-date").val('');
 });
 
-//get history of payments DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE
+//get history of payments DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE
 $('#btn-history').click(function (ev) {
     ev.preventDefault();
     $(".result").html("");
@@ -172,14 +172,16 @@ $('#btn-history').click(function (ev) {
             goFun(sta, limit);
 
             function goFun(sta, limit) {
+                $('.result').append('<table><tr><th>Bill ID</th><th>Service</th><th>Pay Date</th><th>Amount</th><th>Subscriber</th><th>Phone number</th></tr>');
                 for (var i = sta; i < limit; i++) {
 
-                    var $nr = $('<div>Bill ID: ' + response[i]['id'] + ', Service: ' + response[i]['service'] +
-                        ', PayDate: ' + response[i]['payDate'] + ', Amount: ' + response[i]['amount'] + ' ' + response[i]['currency'] +
-                        ' Subscriber:' + response[i]['subscriber']['firstName'] + ' ' + response[i]['subscriber']['lastName'] +
-                        ',. Phone number: ' + response[i]['subscriber']['phoneNumber'] + '</div>');
-                    $('.result').append($nr);
+                    var $nr = $('<tr><td>' + response[i]['id'] + '</td><td>' + response[i]['service'] +
+                        '</td><td>' + response[i]['payDate'] + '</td><td>' + response[i]['amount'] + ' ' + response[i]['currency'] +
+                        '</td><td>' + response[i]['subscriber']['firstName'] + ' ' + response[i]['subscriber']['lastName'] +
+                        '</td><td>' + response[i]['subscriber']['phoneNumber'] + '</td></tr>');
+                    $('.result table').append($nr);
                 }
+        
             }
 
             $('#nextValue').click(function () {
@@ -212,7 +214,7 @@ $('#btn-history').click(function (ev) {
 
 });
 
-//get top 10 subscribers by biggest amount /for all bills/ paid DONE DONE DONE DONE DONE DONE DONE DONE
+//get top 10 subscribers by biggest amount /for all bills/ paid DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE
 $('#btn-top-ten').click(function (ev) {
     ev.preventDefault();
     $(".result").html("");
@@ -228,9 +230,9 @@ $('#btn-top-ten').click(function (ev) {
         if (!jQuery.isEmptyObject(Response)) {
             var toAppend = '<table><tr><th>Amount paid</th><th>First Name</th><th>Last Name</th><th>Phone Number</th></tr>';
             $.each(response, function (i, o) {
-                toAppend +='<tr><td>'+ o.amount + ' BGN</td><td>'+ o.firstName + '</td><td>'+ o.lastName + '</td><td>'
-                + o.phoneNumber + '</td></tr>';
-                
+                toAppend += '<tr><td>' + o.amount + ' BGN</td><td>' + o.firstName + '</td><td>' + o.lastName + '</td><td>'
+                    + o.phoneNumber + '</td></tr>';
+
             });
             toAppend += '</table>'
         } else {
@@ -246,7 +248,7 @@ $('#btn-top-ten').click(function (ev) {
         });
 });
 
-//pay bill DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE
+//pay bill 
 $('#btn-pay').click(function (ev) {
     ev.preventDefault();
     $(".result").html("");
@@ -292,7 +294,7 @@ $('#btn-unpaid').click(function (ev) {
             "Authorization": localStorage.getItem("token")
         }
     }).done(function (response) {
-            if(response.length != 0){
+        if (response.length != 0) {
             var toAppend = '';
             $.each(response, function (i, o) {
                 toAppend += '<div> Bill ID:' + o.id + ', Service:' + o.service + ', Amount: ' + o.amount +
@@ -301,7 +303,7 @@ $('#btn-unpaid').click(function (ev) {
             });
             $('.result')
                 .append(toAppend);
-        } else{
+        } else {
             $('.result')
                 .append($('<div>No unpaid bills for this subscriber! </div>'));
         }
