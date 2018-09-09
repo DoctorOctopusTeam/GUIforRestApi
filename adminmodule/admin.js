@@ -50,7 +50,7 @@ $('#sign-up-user').click(function (ev) {
     let $password = $('#passwordclient').val();
     let $repeatedPassword = $('#repeat-passwordclient').val();
     let $details = $('#detailsclient').val();
-    let $eik = $('#eikclient').val();
+    let $eik = bigInt($('#eikclient').val());
     let $data = JSON.stringify({
         'userName': $username,
         'password': $password,
@@ -143,7 +143,7 @@ $('#update-client').click(function (ev) {
     let $newUsername = $('#newusernameupdate').val();
     let $newPassword = $('#passwordupdate').val();
     let $newDetails = $('#detailsupdate').val();
-    let $newEik = $('#eikupdate').val();
+    let $newEik = bigInt($('#eikupdate').val());
     let $newEmail = $('#emailupdate').val();
     let $newEnabled = $('#enabledupdate').val();
     if ($newEnabled === "") {
@@ -312,7 +312,10 @@ $('#issuebill').click(function (ev) {
             contentType: 'application/json'
         })
         .done(function (data, result, hxr) {
-            let $controlvariable = data[3].phoneNumber;
+            // let $controlvariable = data[3].phoneNumber;
+            $('#cur1').empty();
+            $('#cur1').append('<option selected>-</option>');
+
             $.each(data, function (key, value) {
                 let $phone = data[key].phoneNumber;
                 $('#cur1').append($('<option>', {

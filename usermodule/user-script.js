@@ -201,7 +201,7 @@ $('#btn-history').click(function (ev) {
             });
         } else {
             modal.style.display = "block";
-            $('#myModal p').text('No payment records for this period');
+            $('#myModal p').text('No subscribers for this user!');
         }
     })
 

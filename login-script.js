@@ -31,7 +31,6 @@ $('#login-button').click(function (ev) {
     })
     .fail(function(){
         $('#invalid').show();
->>>>>>> nasko
     })
         .fail(function () {
             $('#invalid').show();
