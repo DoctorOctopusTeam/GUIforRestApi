@@ -29,7 +29,7 @@ $('#change-password-btn').click(function(ev){
             $seconds--;
             if($seconds < 1){
                 clearInterval();
-                window.location.href = "http://localhost:8081/admin.html";
+                window.location.href = "http://localhost:8081/adminmodule/admin.html";
             }
         }, 1000);       
     })

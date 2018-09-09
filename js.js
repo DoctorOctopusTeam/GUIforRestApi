@@ -17,12 +17,17 @@ $('#login-button').click(function (ev) {
         var role = xhr.getResponseHeader('Role');
         localStorage.setItem("token", token);
         if(role === "ROLE_USER") {
-            window.location.href = "http://localhost:8081/one.html";
+            window.location.href = "/one.html";
         } 
         if(role === "ROLE_UNAUTHORIZEDADMIN") {
-            window.location.href = "http://localhost:8081/unauthorizedadmin.html";
+            window.location.href = "/unauthorizedadmin.html";
         }else {
-            window.location.href = "http://localhost:8081/admin.html";
+            window.location.href = "/admin.html";
         }
-    });
+    })
+    .fail(function(){
+        $('#invalid').show();
+    })
+    $('#username').val('');
+    $('#password').val('');
 });
