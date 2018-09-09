@@ -81,7 +81,7 @@ $('#sign-up-user').click(function (ev) {
             $('#modal-titleclient').text('Successfully added new client');
             $('#modal-textclient').text(data.userName + ' added to the database');
         })
-        .fail(function (data, result, hxr) {
+        .fail(function (data, result, xhr) {
             $('#modal-titleclient').empty();
             $('#modal-textclient').empty();
             let $errorMessage = data.getResponseHeader('Error');
