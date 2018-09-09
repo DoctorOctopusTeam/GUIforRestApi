@@ -209,7 +209,7 @@ $('#delete-user').click(function (ev) {
         $('#modal-textdel').empty();
         $('#delModal').modal('show');
         $('#modal-titledel').text('Be sure to match');
-        $('#modal-textdel').text('both firedls!');
+        $('#modal-textdel').text('both fields!');
         return;
     }
     let $url = 'http://localhost:8080/admin/delete?nameOfBank=' + $username;
@@ -248,7 +248,7 @@ $('#newbill').click(function (ev) {
     let $phoneNumber = $('#cur1').val();
     let $amount = $('#amount').val();
     let $currency = $('#currency').val();
-    if ($service === undefined || $startDate === "" || $endDate === "" || $phoneNumber === undefined) {
+    if ($service === undefined || $startDate === "" || $endDate === "" || $phoneNumber === undefined || $amount === "") {
         $('#modal-titlebill').empty();
         $('#modal-textbill').empty();
         $('#billModal').modal('show');
@@ -391,43 +391,11 @@ function listAll(role) {
             //$('#res').bootstrapTable('load', data1);
             $('#res').bootstrapTable({
                 data: data1
-            });
-            // $('#qtex').empty();
-            // $('#querymodal').modal('show');
-            // $('#result-one').append($('<tr>'))
-            //     .append($('<th>', {
-            //         text: 'Username'
-            //     }))
-            //     .append($('<th>', {
-            //         text: 'Is user enabled'
-            //     }))
-            //     .append($('<th>', {
-            //         text: 'Details'
-            //     }))
-            //     .append($('<th>', {
-            //         text: 'Email'
-            //     }))
-            //     .append($('<br>'));
-
-            // $.each(data, function (key, value) {
-            //     $('#result-two').append($('<tr>'))
-            //         .append($('<td>', {
-            //             text: data[key].userName
-            //         }))
-            //         .append($('<td>', {
-            //             text: data[key].enabled
-            //         }))
-            //         .append($('<td>', {
-            //             text: data[key].details
-            //         }))
-            //         .append($('<td>', {
-            //             text: data[key].email
-            //         }));
-            // })          
+            });    
         })
         .fail(function (data, result, hxr) {
             $('#qtex').empty();
             $('#querymodal').modal('show');
-            $('#qtex').text('Oh fuck!');
+            $('#qtex').text('Make sure the surver runs!');
         });
 }
