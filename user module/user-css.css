@@ -85,3 +85,8 @@ h1{
     font-size: 28px;
     font-weight: bold;
 }
+
+::-webkit-input-placeholder {
+    text-align: center;
+ }
+ 
