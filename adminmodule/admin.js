@@ -248,7 +248,8 @@ $('#newbill').click(function (ev) {
     let $phoneNumber = $('#cur1').val();
     let $amount = $('#amount').val();
     let $currency = $('#currency').val();
-    if ($service === undefined || $startDate === "" || $endDate === "" || $phoneNumber === undefined || $amount === "") {
+    if ($service === undefined || $startDate === "" || $endDate === "" || $phoneNumber === undefined || $amount === ""
+|| $service ==="-"  || $currency === "-") {
         $('#modal-titlebill').empty();
         $('#modal-textbill').empty();
         $('#billModal').modal('show');
