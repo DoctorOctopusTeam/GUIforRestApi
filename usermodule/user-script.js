@@ -1,4 +1,4 @@
-//get subscriber info  
+//get subscriber info           DONE DONE DONE
 $('#btn-info').click(function (ev) {
     ev.preventDefault();
     $(".result").html("");
@@ -20,15 +20,20 @@ $('#btn-info').click(function (ev) {
             modal.style.display = "block";
             $('#myModal p').text('Invalid phone number!');
         }
-    })      
+    })
         .fail(function () {
-            modal.style.display = "block";
-            $('#myModal p').text('Error occured!');
+            if (subscriber === '') {
+                modal.style.display = "block";
+                $('#myModal p').text('Error! Must enter phone number!');
+            } else {
+                modal.style.display = "block";
+                $('#myModal p').text('Error occured!');
+            }
         });
     $("#phone-info").val('');
 });
 
-//get subcriber services 
+//get subcriber services            DONE DONE DONE
 $('#btn-services').click(function (ev) {
     ev.preventDefault();
     $(".result").html("");
@@ -48,14 +53,19 @@ $('#btn-services').click(function (ev) {
                 $('.result table')
                     .append($('<tr><td>' + data[i] + '</td></tr>'));;
             });
-        } else {                
+        } else {
             modal.style.display = "block";
             $('#myModal p').text('Invalid action. Enter valid phone number!');
         }
     })
         .fail(function () {
-            modal.style.display = "block";
-            $('#myModal p').text('Error occured!');
+            if (subscriber === '') {
+                modal.style.display = "block";
+                $('#myModal p').text('Error! Must enter phone number!');
+            } else {
+                modal.style.display = "block";
+                $('#myModal p').text('Error occured!');
+            }
         });
     $("#phone-services").val('');
 });
@@ -82,19 +92,27 @@ $('#btn-max').click(function (ev) {
                 start + ' - ' + end + '</td><td>' + subscriber + '</td>';
             $('.result table')
                 .append(vv);
-        } else {                
+        } else {
             modal.style.display = "block";
             $('#myModal p').text('No records for this period!');
         }
     })
         .fail(function (data) {
             if (data.getResponseHeader('Error') === 'Not valid phone number') {
+                //wrong phone number - right date format
                 modal.style.display = "block";
                 $('#myModal p').text('Not valid phone number!');
             } else if (data.getResponseHeader('Error') === 'No payment records for this period') {
+                //right phone number - right dates, but no payment records
                 modal.style.display = "block";
                 $('#myModal p').text('No payment records for this period');
-            } else {
+            } else if (subscriber === '') { //no entered phone number - entered right date format
+                modal.style.display = "block";
+                $('#myModal p').text('Invalid action! Enter phone number!');
+            } else if (start === '' || end === '') { //no entered dates
+                modal.style.display = "block";
+                $('#myModal p').text('Invalid action! Enter dates!');
+            } else { //entered wrong date format or no dates at all
                 modal.style.display = "block";
                 $('#myModal p').text('Invalid action! Enter valid time period!');
             }
@@ -126,29 +144,37 @@ $('#btn-average').click(function (ev) {
                 start + ' - ' + end + '</td><td>' + subscriber + '</td>';
             $('.result table')
                 .append(vv);
-        } else {                    
+        } else {
             $('.result')
                 .append($('<div>No records for this period!</div>'));
         }
     })
-        .fail(function (data) {
-            if (data.getResponseHeader('Error') === 'Not valid phone number') {
-                modal.style.display = "block";
-                $('#myModal p').text('Not valid phone number!');
-            } else if (data.getResponseHeader('Error') === 'No payment records for this period') {
-                modal.style.display = "block";
-                $('#myModal p').text('No payment records for this period');
-            } else {
-                modal.style.display = "block";
-                $('#myModal p').text('Invalid action! Enter valid time period!');
-            }
-        });
+    .fail(function (data) {
+        if (data.getResponseHeader('Error') === 'Not valid phone number') {
+            //wrong phone number - right date format
+            modal.style.display = "block";
+            $('#myModal p').text('Not valid phone number!');
+        } else if (data.getResponseHeader('Error') === 'No payment records for this period') {
+            //right phone number - right dates, but no payment records
+            modal.style.display = "block";
+            $('#myModal p').text('No payment records for this period');
+        } else if (subscriber === '') { //no entered phone number - entered right date format
+            modal.style.display = "block";
+            $('#myModal p').text('Invalid action! Enter phone number!');
+        } else if (start === '' || end === '') { //no entered dates
+            modal.style.display = "block";
+            $('#myModal p').text('Invalid action! Enter dates!');
+        } else { //entered wrong date format or no dates at all
+            modal.style.display = "block";
+            $('#myModal p').text('Invalid action! Enter valid time period!');
+        }
+    });
     $("#phone-average").val('');
     $("#average-start-date").val('');
     $("#average-end-date").val('');
 });
 
-//get history of payments
+//get history of payments                       DONE DONE DONE
 $('#btn-history').click(function (ev) {
     ev.preventDefault();
     $(".result").html("");
@@ -162,8 +188,10 @@ $('#btn-history').click(function (ev) {
         }
     }).done(function (response) {
         if (!jQuery.isEmptyObject(response)) {
-            $('#nextValue').show();
-            $('#PreeValue').show();
+            if (response.length > 10) {
+                $('#nextValue').show();
+                $('#PreeValue').show();
+            }
             var max_size = response.length;
             var sta = 0;
             var elements_per_page = 10;
@@ -201,18 +229,18 @@ $('#btn-history').click(function (ev) {
             });
         } else {
             modal.style.display = "block";
-            $('#myModal p').text('No subscribers for this user!');
+            $('#myModal p').text('No payments made from subscribers of this user!');
         }
     })
 
         .fail(function () {
             modal.style.display = "block";
-            $('#myModal p').text('Error ');
+            $('#myModal p').text('Error occured!');
         });
 
 });
 
-//get top 10 subscribers by biggest amount /for all bills/ paid 
+//get top 10 subscribers by biggest amount /for all bills/ paid             DONE DONE DONE
 $('#btn-top-ten').click(function (ev) {
     ev.preventDefault();
     $(".result").html("");
@@ -225,7 +253,7 @@ $('#btn-top-ten').click(function (ev) {
             "Authorization": localStorage.getItem("token")
         }
     }).done(function (response) {
-        if (!jQuery.isEmptyObject(Response)) {
+        if (!jQuery.isEmptyObject(response)) {
             var toAppend = '<table><tr><th>Amount paid</th><th>First Name</th><th>Last Name</th><th>Phone Number</th></tr>';
             $.each(response, function (i, o) {
                 toAppend += '<tr><td>' + o.amount + ' BGN</td><td>' + o.firstName + '</td><td>' + o.lastName + '</td><td>'
@@ -235,7 +263,7 @@ $('#btn-top-ten').click(function (ev) {
 
         } else {
             modal.style.display = "block";
-            $('#myModal p').text('No payment records for this period');
+            $('#myModal p').text('No payment records!');
         }
     })
         .fail(function () {
@@ -280,7 +308,7 @@ $('#btn-pay').click(function (ev) {
     $("#bill-id").val('');
 });
 
-//get list of all unpaid bills of subscriber
+//get list of all unpaid bills of subscriber        DONE DONE DONE
 $('#btn-unpaid').click(function (ev) {
     ev.preventDefault();
     $(".result").html("");
@@ -312,6 +340,9 @@ $('#btn-unpaid').click(function (ev) {
             if (data.getResponseHeader('Error') === 'Not valid phone number') {
                 modal.style.display = "block";
                 $('#myModal p').text('Not valid phone number!');
+            } else {
+                modal.style.display = "block";
+                $('#myModal p').text('Error! Must enter phone number!');
             }
         });
     $("#unpaid-phone").val('');

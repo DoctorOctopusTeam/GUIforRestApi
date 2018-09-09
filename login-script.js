@@ -20,21 +20,19 @@ $('#login-button').click(function (ev) {
         var role = xhr.getResponseHeader('Role');
             localStorage.setItem("token", token);
             if (role === "ROLE_USER") {
-                window.location.href = "http://localhost:8081/usermodule/user.html";
+                window.location.href = "/usermodule/user.html";
                 
             }if(role === "ROLE_UNAUTHORIZEDADMIN") {
-                window.location.href = "http://localhost:8081/unauthorizedadmin.html";
+                window.location.href = "1/unauthorizedadmin.html";
             } else if(role === "ROLE_ADMIN") {
-                window.location.href = "http://localhost:8081/adminmodule/admin.html";
+                window.location.href = "/adminmodule/admin.html";
             }
         
     })
     .fail(function(){
         $('#invalid').show();
     })
-        .fail(function () {
-            $('#invalid').show();
-        })
+        
     $('#username').val('');
     $('#password').val('');
 });
